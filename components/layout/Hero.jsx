@@ -3,7 +3,7 @@ import React from "react";
 
 const Hero = () => {
   return (
-    <div className="relative h-[60vh] bg-amber-400 mt-4">
+    <div className="relative h-[60vh] sm:h-[70vh] md:h-[80vh] bg-amber-400">
       <div className="absolute z-10 left-0 top-0 w-full h-full">
         <Image
           src="/assets/photos/hero.jpg"
