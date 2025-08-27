@@ -4,14 +4,15 @@ import { AboutMe, Contacts, Home, Services } from '../../components'
 
 
 
-const Board = ({currentIndex}) => {
+const Board = ({currentTab, setCurrentTab}) => {
+  console.log(currentTab)
   return (
-    <div className='mt-4 bg-primary-green min-h-[50vh] text-white'>
+    <div className='bg-white min-h-[50vh]'>
       <div>
-        {currentIndex == 0 && <Home/>}
-        {currentIndex == 1 && <AboutMe/>}
-        {currentIndex == 2 && <Services/>}
-        {currentIndex == 3 && <Contacts/>}
+        {currentTab == 'home' && <Home  currentTab = {currentTab} setCurrentTab={setCurrentTab} />}
+        {currentTab == 'about me' && <AboutMe/>}
+        {currentTab == 'services' && <Services/>}
+        {currentTab == 'contacts' && <Contacts/>}
       </div>
     </div>
   )

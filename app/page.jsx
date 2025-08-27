@@ -5,13 +5,15 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 
 export default function Home() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentTab, setCurrentTab] = useState("home");
   
   return (
     <>
-      <Navbar currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
+      <Navbar currentTab={currentTab} setCurrentTab={setCurrentTab} />
       <Hero />
-      <Board currentIndex = {currentIndex} />
+      <Board currentTab = {currentTab} setCurrentTab={setCurrentTab} />
     </>
   );
 }
+
+

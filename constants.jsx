@@ -8,12 +8,12 @@ export const NAVLINKS = [
     path: "/about",
   },
   {
-    text: "service",
-    path: "/service",
+    text: "services",
+    path: "/services",
   },
   {
-    text: "contact",
-    path: "/contact",
+    text: "contacts",
+    path: "/contacts",
   },
 ];
 
@@ -40,7 +40,7 @@ export const ABOUT_LINKS = [
     bg: "#FF9999",
   },
   {
-    text: "Event management",
+    text: "event management",
     bg: "#8F0707",
   },
 ];

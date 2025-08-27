@@ -2,7 +2,6 @@
 import Image from "next/image";
 import React, { useRef, useState } from "react";
 import { NAVLINKS } from "../constants";
-import Board from "./layout/Board";
 
 
 function MenuIcon() {
@@ -33,7 +32,7 @@ function CloseIcon() {
   );
 }
 
-const Navbar = ({currentIndex, setCurrentIndex}) => {
+const Navbar = ({currentTab, setCurrentTab}) => {
   
 
   return (
@@ -44,7 +43,7 @@ const Navbar = ({currentIndex, setCurrentIndex}) => {
       <div className="pr-2 sm:pr-4 flex gap-4 uppercase h-full rounded-tl-full rounded-bl-full justify-end items-center w-[72vw] md:w-[80vw] bg-deep-red ">
           {NAVLINKS.map((navlink, index) => (
             <div className="cursor-pointer text-[10px] md:text-[18px] sm:text-[16px] max-sm:font-semibold uppercase" key={index}>
-              <p onClick={ () => setCurrentIndex(index) } className="p-1"> {navlink.text} </p>
+              <p onClick={ () => setCurrentTab(navlink.text) } className="p-1"> {navlink.text} </p>
             </div>
           ))}
       </div>
