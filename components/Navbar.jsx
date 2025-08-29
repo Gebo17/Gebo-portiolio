@@ -40,7 +40,7 @@ const Navbar = ({currentTab, setCurrentTab}) => {
       <div>
         <Image src="/assets/logo.png" alt="logo" width={70} height={70} />
       </div>
-      <div className="pr-2 sm:pr-4 flex gap-4 uppercase h-full rounded-tl-full rounded-bl-full justify-end items-center w-[72vw] md:w-[80vw] bg-deep-red ">
+      <div className="pr-2 sm:pr-4 flex gap-2 sm:gap-4 uppercase h-full rounded-tl-full rounded-bl-full justify-end items-center w-[72vw] md:w-[80vw] bg-deep-red ">
           {NAVLINKS.map((navlink, index) => (
             <div className="cursor-pointer text-[10px] md:text-[18px] sm:text-[16px] max-sm:font-semibold uppercase" key={index}>
               <p

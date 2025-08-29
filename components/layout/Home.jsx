@@ -29,10 +29,10 @@ const Home = ({setCurrentTab, currentTab}) => {
             <div>
               <div className="mx-auto sm:pr-4 py-2 bg-amber-50 flex flex-wrap justify-center items-center gap-1 capitalize w-full">
                         {HOME_LINKS.map((navlink, index) => (
-                          <div className="cursor-pointer text-[10px] md:text-[18px] sm:text-[16px] max-sm:font-semibold capitalize" key={index}>
+                          <div className="cursor-pointer text-[10px] md:text-[18px] sm:text-[16px] w-[90px] max-sm:font-semibold capitalize" key={index}>
                             <p 
   onClick={() => setHomeTab(navlink.text)}
-  className={`p-1 text-white rounded-md bg-primary-red `}
+  className={`text-center p-1 text-white rounded-md bg-primary-red `}
 >
   {navlink.text}
 </p>

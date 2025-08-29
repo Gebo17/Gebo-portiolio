@@ -16,7 +16,7 @@ const AboutMe = () => {
                           <div className={`cursor-pointer text-[12px] md:text-[18px] sm:text-[16px] max-sm:font-semibold capitalize `} key={index}>
                             <p onClick={ () => setAboutTab(navlink.text) } className={`${aboutTab === navlink.text || (aboutTab === 'default' && navlink.text === 'Who am i') 
       ? 'bg-primary-red text-white'
-      : 'bg-white text-black'} p-1 border-1 border-primary-red rounded-md`}  > {navlink.text} </p>
+      : 'bg-white text-black'} p-1 rounded-md`}  > {navlink.text} </p>
                           </div>
                         ))}
                 </div>

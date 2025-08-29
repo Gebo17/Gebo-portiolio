@@ -6,3 +6,24 @@
   --color-sec-red: #ff9999;
   --color-primary-green: #149805;
 }
+
+
+.scorllbar-x {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+
+.scorllbar-x::-webkit-scrollbar {
+ display: none;
+ width: 0;
+}
+
+/* global.css */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE/Edge */
+  scrollbar-width: none;     /* Firefox */
+}

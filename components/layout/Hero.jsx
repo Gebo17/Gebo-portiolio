@@ -1,5 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
+
 
 const Hero = () => {
   return (
@@ -19,7 +21,14 @@ const Hero = () => {
         <p>Welcome To Gebo</p>
       </div>
 
-      <button className="px-8 py-0 flex items-center justify-center cursor-pointer absolute z-30 left-1/2 -translate-1/2 bottom-8 bg-white border-1 rounded-l-full rounded-tr-full border-amber-50 text-white">
+       <Link
+          href="https://wa.me/255688043125?text=Hello%20GEBO"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Open WhatsApp chat"
+          className="inline-flex"
+          >
+      <button className="px-2 py-0 flex items-center justify-center cursor-pointer absolute z-30 left-1/2 -translate-1/2 bottom-8 bg-white border-1 rounded-l-full rounded-tr-full border-amber-50 text-white">
         <div className="flex justify-center items-center">
       <img
         src="/assets/gif/whatsaap.gif"
@@ -27,8 +36,9 @@ const Hero = () => {
         className=" sm:w-10 sm:h-10 w-7 h-7"
       />
     </div>
-    <p className="text-primary-green sm:text-xl"> Send Sms </p>
+    <p className="text-primary-green sm:text-xl font-semibold"> Send SMS </p>
       </button>
+      </Link>
     </div>
   );
 };
