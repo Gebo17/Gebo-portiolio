@@ -1,21 +1,27 @@
 import { NAVLINKS } from '@/constants'
 import React from 'react'
-import { AboutMe, Contacts, Home, Services } from '../../components'
+import { AboutMe, Branding, Contacts, Home, Services } from '../../components'
 
 
-
-const Board = ({currentTab, setCurrentTab}) => {
-  console.log(currentTab)
+const Board = ({ currentTab, setCurrentTab }) => {
   return (
-    <div className='bg-white min-h-[50vh]'>
+    <div className="bg-white min-h-[50vh]">
       <div>
-        {currentTab == 'home' && <Home  currentTab = {currentTab} setCurrentTab={setCurrentTab} />}
-        {currentTab == 'about me' && <AboutMe/>}
-        {currentTab == 'services' && <Services/>}
-        {currentTab == 'contacts' && <Contacts/>}
+        {currentTab === "home" && (
+          <Home currentTab={currentTab} setCurrentTab={setCurrentTab} />
+        )}
+        {currentTab === "about me" && (
+          <AboutMe currentTab={currentTab} setCurrentTab={setCurrentTab} />
+        )}
+        {currentTab === "services" && (
+          <Services currentTab={currentTab} setCurrentTab={setCurrentTab} />
+        )}
+        {currentTab === "contacts" && (
+          <Contacts currentTab={currentTab} setCurrentTab={setCurrentTab} />
+        )}
       </div>
-    </div>
-  )
-}
+    </div> 
+  );
+};
 
-export default Board
+export default Board;

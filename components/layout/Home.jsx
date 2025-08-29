@@ -1,12 +1,49 @@
-import { ABOUT_LINKS } from '@/constants'
+import { HOME_LINKS } from '@/constants'
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { Advertising, Branding, Blog, GraphicDesigns, Printing, Websites, FadeUp } from '../'
+import CountUp from "react-countup";
+import { useInView } from "react-intersection-observer";
+import { motion } from 'framer-motion';
 
-const Home = ({setCurrentTab, CurrentTab}) => {
-console.log('')
+ 
+const Home = ({setCurrentTab, currentTab}) => {
+  const [homeTab, setHomeTab] = useState('default')
+   const [startAnimation, setStartAnimation] = useState(false);
+    const { ref, inView } = useInView({
+      threshold: 0.5,
+      triggerOnce: false,
+    });
+  
+    useEffect(() => {
+      if (inView) {
+        setStartAnimation(true);
+      } else {
+        setStartAnimation(false);
+      }
+    }, [inView]);
+
   return (
-    <div className='min-h-[50vh] relative w-full'>
-      <div className="absolute z-10 left-0 top-0 w-full h-full">
+    <div className='min-h-[50vh] w-full'>
+      
+            <div>
+              <div className="mx-auto sm:pr-4 py-2 bg-amber-50 flex flex-wrap justify-center items-center gap-1 capitalize w-full">
+                        {HOME_LINKS.map((navlink, index) => (
+                          <div className="cursor-pointer text-[10px] md:text-[18px] sm:text-[16px] max-sm:font-semibold capitalize" key={index}>
+                            <p 
+  onClick={() => setHomeTab(navlink.text)}
+  className={`p-1 text-white rounded-md bg-primary-red `}
+>
+  {navlink.text}
+</p>
+                          </div>
+                        ))}
+                </div>
+            </div>
+
+       { homeTab === 'default' && (
+        <div className='relative w-full min-h-[50vh] '> 
+           <div className="absolute z-10 left-0 top-0 w-full h-full">
               <Image
                 src="/assets/photos/aboutbg.png"
                 alt="bg photo"
@@ -15,30 +52,68 @@ console.log('')
                 className="object-cover"
               />
             </div>
-            <div>
-              <div className="mx-auto absolute z-20 top-0 left-0 sm:pr-4 py-2 bg-amber-50 flex flex-wrap justify-center items-center gap-1 capitalize w-full">
-                        {ABOUT_LINKS.map((navlink, index) => (
-                          <div className="cursor-pointer text-[10px] md:text-[18px] sm:text-[16px] max-sm:font-semibold capitalize" key={index}>
-                            <p onClick={ () => setCurrentTab(navlink.text) } className={`p-1 text-white rounded-md bg-primary-red`}  > {navlink.text} </p>
-                          </div>
-                        ))}
-                </div>
-            </div>
+         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20  text-center w-full text-white">
+            <FadeUp>
 
-       { CurrentTab === 'home' && <div className="text-center w-full absolute z-20 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white">
-        <p className='font-semibold text-4xl'>Let's Build</p>
-        <p className='font-semibold text-4xl'>Amazing Things</p>
-        <p className='font-semibold text-4xl'>That Stand Out</p>
-        <div className="mt-4 flex gap-2 justify-center items-center">
+            <p className='font-semibold text-4xl'>Let's Build</p>
+           <p className='font-semibold text-4xl'>Amazing Things</p>
+           <p className='font-semibold text-4xl'>That Stand Out</p>
+           <div className="mt-4 flex gap-2 justify-center items-center">
           <div className='w-20 h-[2px] bg-white ' />
-          Together
+             Together
           <div className='w-20 h-[2px] bg-white ' />
         </div>
-      </div>}
-      {CurrentTab == 'branding' && <p>brand</p> }
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0.5, y: 10 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          ref={ref}
+        className="mt-12 flex items-start justify-around font-semibold">
+           <div>
+              <CountUp
+                start={0}
+                end={80}
+                /> <span>+</span>
+                <p>Clients</p>
+           </div>
+           <div>
+              <CountUp
+                start={0}
+                end={2}
+                /> <span>+</span>
+                <p>Years Of <br /> Experience</p>
+           </div>
+           <div>
+              <CountUp
+                start={0}
+                end={270}
+                /> <span>+</span>
+                <p>Projects</p>
+           </div>
+        </motion.div>
+            </FadeUp>
+      </div>
+        </div>
+         
+
+       )}
+
+       {
+        homeTab === 'branding' && (
+          <Branding/>
+        )
+       }
+
+       {homeTab === 'advertising' && (<Advertising/>)}
+       {homeTab === 'blog' && (<Blog/>)}
+       {homeTab === 'graphic designs' && (<GraphicDesigns/>)}
+       {homeTab === 'printing' && (<Printing/>)}
+       {homeTab === 'websites' && (<Websites/>)}
       
     </div>
   )
 }
 
 export default Home
+

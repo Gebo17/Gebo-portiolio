@@ -13,7 +13,7 @@ export default function Home() {
       <Hero />
       <Board currentTab = {currentTab} setCurrentTab={setCurrentTab} />
     </>
-  );
+  ); 
 }
 
 
