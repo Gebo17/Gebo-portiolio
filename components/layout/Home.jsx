@@ -26,19 +26,32 @@ const Home = ({setCurrentTab, currentTab}) => {
   return (
     <div className='min-h-[50vh] w-full'>
       
-            <div>
-              <div className="mx-auto sm:pr-4 py-2 bg-amber-50 flex flex-wrap justify-center items-center gap-1 capitalize w-full">
-                        {HOME_LINKS.map((navlink, index) => (
-                          <div className="cursor-pointer text-[10px] md:text-[18px] sm:text-[16px] w-[90px] max-sm:font-semibold capitalize" key={index}>
-                            <p 
-  onClick={() => setHomeTab(navlink.text)}
-  className={`text-center p-1 text-white rounded-md bg-primary-red `}
->
-  {navlink.text}
-</p>
-                          </div>
-                        ))}
-                </div>
+            <div className='mt-8'>
+             <div className="mx-auto sm:pr-4 py-2 bg-amber-50 flex flex-wrap justify-center items-center gap-1 capitalize w-full">
+  {HOME_LINKS.map((navlink, index) => {
+    const isActive = homeTab === navlink.text;
+
+    return (
+      <div
+        key={index}
+        className="cursor-pointer text-[10px] md:text-[16px] sm:text-[14px] max-sm:w-[90px] max-sm:font-semibold capitalize"
+      >
+        <p
+          onClick={() => setHomeTab(navlink.text)}
+          className={`
+            text-center p-1 rounded-md border transition-colors duration-200
+            ${isActive
+              ? 'bg-primary-red text-white border-primary-red'
+              : 'bg-white text-primary-red border-primary-red hover:bg-primary-red hover:text-white'}
+          `}
+        >
+          {navlink.text}
+        </p>
+      </div>
+    );
+  })}
+</div>
+
             </div>
 
        { homeTab === 'default' && (
@@ -73,21 +86,21 @@ const Home = ({setCurrentTab, currentTab}) => {
            <div>
               <CountUp
                 start={0}
-                end={80}
+                end={60}
                 /> <span>+</span>
                 <p>Clients</p>
            </div>
            <div>
               <CountUp
                 start={0}
-                end={2}
+                end={4}
                 /> <span>+</span>
-                <p>Years Of <br /> Experience</p>
+                <p>Years of <br /> Experience</p>
            </div>
            <div>
               <CountUp
                 start={0}
-                end={270}
+                end={220}
                 /> <span>+</span>
                 <p>Projects</p>
            </div>

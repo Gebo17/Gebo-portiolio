@@ -62,7 +62,7 @@ useEffect(() => {
   
   const SOFTWARE_ICONS = [
     {
-      name: 'photoshop',
+      name: 'Photoshop',
       url: "/assets/icons/PS.svg",
     },
     {
@@ -74,19 +74,19 @@ useEffect(() => {
       url: "/assets/icons/LR.svg",
     },
     {
-      name: 'figma',
+      name: 'Figma',
       url: "/assets/icons/figma.svg",
     },
     {
-      name: 'pixellab',
+      name: 'Pixellab',
       url: "/assets/icons/pixellab.png",
     },
     {
-      name: 'primier pro',
+      name: 'Primier pro',
       url: "/assets/icons/PR.svg",
     },
     {
-      name: 'capcut',
+      name: 'Capcut',
       url: "/assets/icons/capcut.svg",
     },
   ]
@@ -103,7 +103,7 @@ useEffect(() => {
       className="mt-2 overflow-x-scroll hide-scrollbar mx-auto w-[80vw] flex items-start gap-4 sm:gap-12">
         {
         SOFTWARE_ICONS.map( (icon, index) => (
-            <div key={index} className="cursor-pointer block relative  py-2 flex-shrink-0 shadow-lg rounded-md hover:scale-110 transition duration-200">
+            <div key={index} className="cursor-pointer block relative py-2 flex-shrink-0 shadow-lg rounded-md hover:scale-110 transition duration-200">
           <div className="rounded-full inline-block p-[2px]">
             <div className=" flex flex-col gap-x-2">
               <div>
