@@ -26,8 +26,8 @@ const Home = ({setCurrentTab, currentTab}) => {
   return (
     <div className='min-h-[50vh] w-full'>
       
-            <div className='mt-8'>
-             <div className="mx-auto sm:pr-4 py-2 bg-amber-50 flex flex-wrap justify-center items-center gap-1 capitalize w-full">
+            <div className='mt-2'>
+             <div className="mx-auto sm:pr-4 py-2 bg-amber-50 flex flex-wrap justify-center items-center gap-1 sm:gap-2 md:gap-4 capitalize w-full">
   {HOME_LINKS.map((navlink, index) => {
     const isActive = homeTab === navlink.text;
 
@@ -66,7 +66,6 @@ const Home = ({setCurrentTab, currentTab}) => {
               />
             </div>
          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20  text-center w-full text-white">
-            <FadeUp>
 
             <p className='font-semibold text-4xl'>Let's Build</p>
            <p className='font-semibold text-4xl'>Amazing Things</p>
@@ -105,7 +104,6 @@ const Home = ({setCurrentTab, currentTab}) => {
                 <p>Projects</p>
            </div>
         </motion.div>
-            </FadeUp>
       </div>
         </div>
          
