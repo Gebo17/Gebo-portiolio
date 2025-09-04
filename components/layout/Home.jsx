@@ -81,7 +81,7 @@ const Home = ({setCurrentTab, currentTab}) => {
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0.5, y: 10 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
           ref={ref}
-        className="mt-12 flex items-start justify-around font-semibold">
+        className="mt-12 flex items-start justify-around font-bold">
            <div>
               <CountUp
                 start={0}
