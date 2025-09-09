@@ -16,5 +16,26 @@ import Vision from "./ui/aboutme/Vision";
 import Software from "./ui/aboutme/Software";
 import WhoIAm from "./ui/aboutme/WhoIAm";
 import FadeUp from "./ui/FadeUp";
+import Loading from "./ui/Loading";
 
-export { Hero, FadeUp, CoreValues, Mission, Vision, Software, WhoIAm, Board, AboutMe, Services, Contacts, Home, Websites, Printing, GraphicDesigns, Blog, Branding, Advertising };
+export {
+  Hero,
+  Loading,
+  FadeUp,
+  CoreValues,
+  Mission,
+  Vision,
+  Software,
+  WhoIAm,
+  Board,
+  AboutMe,
+  Services,
+  Contacts,
+  Home,
+  Websites,
+  Printing,
+  GraphicDesigns,
+  Blog,
+  Branding,
+  Advertising,
+};

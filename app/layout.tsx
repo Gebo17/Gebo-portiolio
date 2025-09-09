@@ -1,56 +1,82 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Navbar from "../components/Navbar";
+'use client';
 
+import { Geist, Geist_Mono } from 'next/font/google';
+import './globals.css';
+import Navbar from '../components/Navbar';
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { Loading } from '@/components'; // Make sure this exists
+import Head from 'next/head';
 
+// Load fonts
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-}); 
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
 });
 
-
-export const metadata: Metadata = {
-  title: "Gebo graphics",
-  description: "I’m Daniel Gabriel, also known as Gebo, a freelance visual communication designer from Tanzania. I am passionate about transforming ideas into visuals that inspire, inform, and connect.",
-  keywords: [
-    "Gebo",
-    "Gebo graphics",
-    "graphics",
-    "designing",
-    "amosi",
-    "amosi sanga",
-    "Gebo creative",
-  ],
-  creator: "aptech",
-  other: {
-    'application/ld+json': JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "url": "https://gebocreative.com",
-      "logo": "/assets/logo.png"
-    }),
-  },
-};
-
+const geistMono = Geist_Mono({
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
+});
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
+  const pathname = usePathname();
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    // Trigger loading animation when route changes
+    setLoading(true);
+
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 10000); // Adjust to control how long the preloader shows
+
+    return () => clearTimeout(timer);
+  }, [pathname]);
 
   return (
     <html lang="en">
+      <Head>
+        <title>Gebo Graphics</title>
+        <meta
+          name="description"
+          content="I’m Daniel Gabriel, also known as Gebo, a freelance visual communication designer from Tanzania..."
+        />
+        <meta
+          name="keywords"
+          content="Gebo, Gebo graphics, graphics, designing, amosi, amosi sanga, Gebo creative"
+        />
+        <meta name="creator" content="Aptech" />
+        {/* JSON-LD structured data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              url: 'https://gebocreative.com',
+              logo: '/assets/logo.png',
+            }),
+          }}
+        />
+      </Head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+       
+        {/* Preloader */}
+        {loading ? (
+          <Loading/>
+        ) : (
+          <>
+            {/* Main Content */}
+            {children}
+          </>
+        )}
       </body>
     </html>
   );

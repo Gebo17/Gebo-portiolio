@@ -8,15 +8,19 @@ const WhoIAm = () => {
   return (
     <div className="mt-4 flex justify-center items-center max-sm:flex-col gap-4 md:gap-8 xl:gap-12">
      
-      <div className='bg-orange-300 shrink-0 rounded-full min-w-[250px] max-w-[400px] h-auto'>
-         <img
+     <div className="shrink-0">
+      <div className='rounded-full'>
+         <Image
           src='/assets/photos/aboutgebo.svg'
           alt='about gebo'
-          className='object-cover w-full'
+          width={300}
+          height={300}
+          className=''
        />
      </div>
+     </div>
 
-      <div className='mt-2 px-4 mb-4 max-sm:mx-auto max-w-[350px] shadow-lg shadow-red-300 rounded-md p-4'>
+      <div className='mt-2 px-4 mb-4 max-sm:mx-2 max-w-[450px] shadow-lg shadow-red-300 rounded-md p-4'>
      
          <p>Hello! I’m Daniel Gabriel, also known as Gebo, a freelance visual communication designer from Tanzania. I am passionate about transforming ideas into visuals that inspire, inform, and connect.</p>
      
