@@ -15,7 +15,6 @@ export default function Loading() {
       }}
     >
       <motion.div
-      classname='w-[100px]'
         animate={{
           scale: [1, 1.2, 1]
         }}
@@ -25,11 +24,10 @@ export default function Loading() {
           ease: 'easeInOut'
         }}
       >
-        <Image
-          src="/assets/logo.png" // ensure this is in the /public folder!
+        <img
+          src="/assets/logo.png" 
           alt="Loading..."
-          fill
-          priority
+          className="w-[100px] "          
         />
       </motion.div>
     </div>

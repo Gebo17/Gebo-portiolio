@@ -28,12 +28,11 @@ export default function RootLayout({
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Trigger loading animation when route changes
     setLoading(true);
 
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 10000); // Adjust to control how long the preloader shows
+    }, 6000); // Adjust to control how long the preloader shows
 
     return () => clearTimeout(timer);
   }, [pathname]);
