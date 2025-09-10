@@ -4,8 +4,8 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import Navbar from '../components/Navbar';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { Loading } from '@/components'; // Make sure this exists
+import { useEffect, useState } from 'react'; 
+import { Loading } from '@/components';
 import Head from 'next/head';
 
 // Load fonts
@@ -25,17 +25,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true); // Start with loading=true
 
   useEffect(() => {
-    setLoading(true);
-
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 6000); // Adjust to control how long the preloader shows
+    }, 10000);
 
     return () => clearTimeout(timer);
-  }, [pathname]);
+  }, []);
 
   return (
     <html lang="en">
@@ -66,16 +64,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-       
-        {/* Preloader */}
-        {loading ? (
-          <Loading/>
-        ) : (
-          <>
-            {/* Main Content */}
-            {children}
-          </>
-        )}
+        
+        {/* Show loading first, then children */}
+        {loading ? <Loading /> : children}
       </body>
     </html>
   );

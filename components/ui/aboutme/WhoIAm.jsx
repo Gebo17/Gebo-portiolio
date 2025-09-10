@@ -10,12 +10,10 @@ const WhoIAm = () => {
      
      <div className="shrink-0">
       <div className='rounded-full'>
-         <Image
+         <img
           src='/assets/photos/aboutgebo.svg'
           alt='about gebo'
-          width={300}
-          height={300}
-          className=''
+          className='w-[300px]'
        />
      </div>
      </div>
