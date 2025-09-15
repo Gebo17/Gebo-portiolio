@@ -1,10 +1,10 @@
 "use client";
 import Image from "next/image";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { NAVLINKS } from "../constants";
+import Loading from "./ui/Loading";
 
-
-function MenuIcon() { 
+function MenuIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -32,30 +32,51 @@ function CloseIcon() {
   );
 }
 
-const Navbar = ({currentTab, setCurrentTab}) => {
-  
+const Navbar = ({ currentTab, setCurrentTab }) => {
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [currentTab]);
 
   return (
-    <div className="sticky left-0 top-0 z-60 bg-primary-red text-white h-[50px] flex justify-between items-center pl-2 sm:pl-4">
-      <div>
-        <Image src="/assets/logo.png" alt="logo" width={70} height={70} />
-      </div>
-      <div className="pr-2 sm:pr-4 flex gap-2 sm:gap-4 uppercase h-full rounded-tl-full rounded-bl-full justify-end items-center w-[72vw] md:w-[80vw] bg-deep-red ">
+    <>
+      {loading && (
+        <div className="fixed w-full z-40 left-0 top-0">
+          <Loading />
+        </div>
+      )}
+      <div className="sticky left-0 top-0 z-60 bg-primary-red text-white h-[50px] flex justify-between items-center pl-2 sm:pl-4">
+        <div>
+          <Image src="/assets/logo.png" alt="logo" width={70} height={70} />
+        </div>
+        <div className="pr-2 sm:pr-4 flex gap-2 sm:gap-4 uppercase h-full rounded-tl-full rounded-bl-full justify-end items-center w-[72vw] md:w-[80vw] bg-deep-red ">
           {NAVLINKS.map((navlink, index) => (
-            <div className="cursor-pointer text-[10px] md:text-[18px] sm:text-[16px] max-sm:font-semibold uppercase" key={index}>
+            <div
+              className="cursor-pointer text-[10px] md:text-[18px] sm:text-[16px] max-sm:font-semibold uppercase"
+              key={index}
+            >
               <p
-  onClick={() => setCurrentTab(navlink.text)}
-  className={`p-1 border-[1px] rounded-md transition-all duration-150 ${
-    currentTab === navlink.text ? 'border-white' : 'border-transparent'
-  }`}
->
-  {navlink.text}
-</p>
+                onClick={() => {
+                  setLoading(true);
+                  setCurrentTab(navlink.text);
+                }}
+                className={`p-1 border-[1px] rounded-md transition-all duration-150 ${
+                  currentTab === navlink.text
+                    ? "border-white"
+                    : "border-transparent"
+                }`}
+              >
+                {navlink.text}
+              </p>
             </div>
           ))}
+        </div>
       </div>
-
-    </div>
+    </>
   );
 };
 

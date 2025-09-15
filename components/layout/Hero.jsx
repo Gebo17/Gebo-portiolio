@@ -13,11 +13,11 @@ const Hero = () => {
 
 
   return (
-    <div className="relative h-[50vh] sm:h-[60vh] md:h-[70vh]">
-      <div className="absolute z-10 left-0 top-0 md:h-[70vh] h-[50vh] w-full">
+    <div className="relative h-[50vh] sm:h-[60vh] md:h-[70vh] ">
+      <div className="absolute z-10 left-0 top-0  w-full h-full">
   <video
     src="/assets/videos/dan.mp4"
-    className="w-full h-full object-cover"
+    className="w-full h-full"
     autoPlay
     loop
     muted
@@ -26,7 +26,7 @@ const Hero = () => {
   />
 </div>
 
-      <div className="absolute z-20 inset-0 bg-black/70"></div>
+      <div className="absolute z-20 inset-0 bg-black/60"></div>
       <div className="text-center font-semibold w-full z-30 text-2xl sm:text-4xl text-white uppercase absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <p>Hello!</p>
         <p>Welcome To The World Of </p>

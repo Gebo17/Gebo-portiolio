@@ -3,7 +3,6 @@ import Image from 'next/image'
 import React from 'react'
 
 
-
 const WhoIAm = () => {
   return (
     <div className="mt-4 flex justify-center items-center max-sm:flex-col gap-4 md:gap-8 xl:gap-12">
