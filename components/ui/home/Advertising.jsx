@@ -1,3 +1,4 @@
+'use client'
 import { FadeUp } from "@/components";
 import { createClient } from "contentful";
 import React, { useEffect, useRef, useState } from "react";
@@ -111,7 +112,7 @@ const Advertising = () => {
                   key={poster.sys.id}
                   onMouseEnter={() => setHoveredCardId(poster.sys.id)}
                   onMouseLeave={() => setHoveredCardId(null)}
-                  className="sm:w-[200px] w-[230px] cursor-pointer rounded shadow-md relative"
+                  className="sm:w-[200px] w-[230px] cursor-pointer rounded shadow-red-400 shadow-md relative"
                 >
                   {/* Image */}
                   <div className="w-[230px]">

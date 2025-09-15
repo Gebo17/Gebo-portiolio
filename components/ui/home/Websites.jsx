@@ -1,3 +1,4 @@
+'use client'
 import { FadeUp } from "@/components";
 import { createClient } from "contentful";
 import Image from "next/image";
@@ -8,9 +9,9 @@ const Websites = () => {
   const [posters, setPosters] = useState(null);
   const [hoveredCardId, setHoveredCardId] = useState(null);
   const scrollRef = useRef(null);
-  const [loadedImages, setLoadedImages] = useState({}); // ✅ Tracks each image load separately
+  const [imageLoaded, setImageLoaded] = useState(false);
 
-useEffect(() => {
+  useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
 
@@ -64,9 +65,6 @@ useEffect(() => {
     };
   }, [scrollRef.current]);
 
-
-
-
   // ✅ Fetch posters from Contentful
   useEffect(() => {
     const getItems = async () => {
@@ -112,38 +110,33 @@ useEffect(() => {
                 : null;
 
               const isCardHovered = hoveredCardId === poster.sys.id;
-              const isImageLoaded = loadedImages[poster.sys.id];
 
               return (
                 <div
                   key={poster.sys.id}
                   onMouseEnter={() => setHoveredCardId(poster.sys.id)}
                   onMouseLeave={() => setHoveredCardId(null)}
-                  className="sm:w-[200px] w-[230px] rounded shadow-md relative"
+                  className="sm:w-[200px] w-[230px] rounded shadow-red-400 shadow-md relative"
                 >
                   {/* Image */}
                   <div className="w-[230px] relative">
                     {imageUrl ? (
-                      <>
-                        {!isImageLoaded && (
-                          <div className="text-red-500 text-center absolute inset-0 flex items-center justify-center z-10">
+                      <div className="relative">
+                        {!imageLoaded ? (
+                          <div className="text-red-500 text-center absolute inset-0 flex items-center justify-center">
                             <p className="w-6 h-6 border-4 border-red-500 border-t-transparent rounded-full animate-spin"></p>
                           </div>
-                        )}
+                        ) : null}
+
                         <img
                           src={imageUrl}
                           alt={title}
-                          onLoad={() =>
-                            setLoadedImages((prev) => ({
-                              ...prev,
-                              [poster.sys.id]: true,
-                            }))
-                          }
+                          onLoad={() => setImageLoaded(true)}
                           className={`w-full h-auto transition-opacity duration-500 ${
-                            isImageLoaded ? "opacity-100" : "opacity-0"
+                            imageLoaded ? "opacity-100" : "opacity-0"
                           }`}
                         />
-                      </>
+                      </div>
                     ) : (
                       <div className="w-full h-48 bg-red-400 flex items-center justify-center text-gray-500">
                         No Image
@@ -213,4 +206,3 @@ useEffect(() => {
 };
 
 export default Websites;
-
