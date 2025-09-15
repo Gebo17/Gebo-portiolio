@@ -10,57 +10,62 @@ const Websites = () => {
   const scrollRef = useRef(null);
   const [loadedImages, setLoadedImages] = useState({}); // ✅ Tracks each image load separately
 
- useEffect(() => {
-  const el = scrollRef.current;
-  if (!el) return;
+useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
 
-  let direction = 1;           // 1 → right, -1 → left
-  const speed = 1;           // px per frame; tweak to taste
-  let hovered = false;
-  let rafId = 0;
+    let direction = 1; // 1 → right, -1 → left
+    const speed = 1; // px per frame; tweak to taste
+    let hovered = false;
+    let rafId = 0;
 
-  const tick = () => {
-    if (!hovered) {
-      // bounce at edges
-      if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 1) {
-        direction = -1;
-      } else if (el.scrollLeft <= 0) {
-        direction = 1;
+    const tick = () => {
+      if (!hovered) {
+        // bounce at edges
+        if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 1) {
+          direction = -1;
+        } else if (el.scrollLeft <= 0) {
+          direction = 1;
+        }
+        el.scrollLeft += speed * direction;
       }
-      el.scrollLeft += speed * direction;
-    }
+      rafId = requestAnimationFrame(tick);
+    };
+
+    // pause/resume on hover
+    const onEnter = () => {
+      hovered = true;
+    };
+    const onLeave = () => {
+      hovered = false;
+    };
+
+    // allow natural manual scroll:
+    //  - vertical wheel → horizontal scroll in the strip
+    //  - prevent page from scrolling while interacting with the strip
+    const onWheel = (e) => {
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        e.preventDefault();
+        el.scrollLeft += e.deltaY;
+      }
+    };
+
+    el.addEventListener("pointerenter", onEnter);
+    el.addEventListener("pointerleave", onLeave);
+    el.addEventListener("wheel", onWheel, { passive: false });
+
     rafId = requestAnimationFrame(tick);
-  };
 
-  // pause/resume on hover
-  const onEnter = () => { hovered = true; };
-  const onLeave = () => { hovered = false; };
+    return () => {
+      cancelAnimationFrame(rafId);
+      el.removeEventListener("pointerenter", onEnter);
+      el.removeEventListener("pointerleave", onLeave);
+      el.removeEventListener("wheel", onWheel);
+    };
+  }, [scrollRef.current]);
 
-  // allow natural manual scroll:
-  //  - vertical wheel → horizontal scroll in the strip
-  //  - prevent page from scrolling while interacting with the strip
-  const onWheel = (e) => {
-    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-      e.preventDefault();
-      el.scrollLeft += e.deltaY;
-    }
-  };
 
-  el.addEventListener("pointerenter", onEnter);
-  el.addEventListener("pointerleave", onLeave);
-  el.addEventListener("wheel", onWheel, { passive: false });
 
-  rafId = requestAnimationFrame(tick);
-
-  return () => {
-    cancelAnimationFrame(rafId);
-    el.removeEventListener("pointerenter", onEnter);
-    el.removeEventListener("pointerleave", onLeave);
-    el.removeEventListener("wheel", onWheel);
-  };
-}, [scrollRef.current]);
-
-  
 
   // ✅ Fetch posters from Contentful
   useEffect(() => {
