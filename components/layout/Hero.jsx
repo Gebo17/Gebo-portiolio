@@ -26,7 +26,7 @@ const Hero = () => {
   />
 </div>
 
-      <div className="absolute z-20 inset-0 bg-black/60"></div>
+      <div className="absolute z-20 inset-0 bg-red-900/70"></div>
       <div className="text-center font-semibold w-full z-30 text-2xl sm:text-4xl text-white uppercase absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <p>Hello!</p>
         <p>Welcome To The World Of </p>
