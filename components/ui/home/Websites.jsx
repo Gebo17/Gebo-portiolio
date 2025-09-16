@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { FadeUp } from "@/components";
 import { createClient } from "contentful";
 import Image from "next/image";
@@ -85,7 +85,7 @@ const Websites = () => {
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative mb-8">
       <FadeUp>
         <h1 className="mt-4 px-4 mx-auto max-w-[400px]">
           I create professional and eye-catching designs that communicate your
@@ -132,7 +132,7 @@ const Websites = () => {
                           src={imageUrl}
                           alt={title}
                           onLoad={() => setImageLoaded(true)}
-                          className={`w-full h-auto transition-opacity duration-500 ${
+                          className={`w-full border border-red-800 rounded h-auto transition-opacity duration-500 ${
                             imageLoaded ? "opacity-100" : "opacity-0"
                           }`}
                         />
@@ -146,12 +146,12 @@ const Websites = () => {
 
                   {/* Red Overlay */}
                   {isCardHovered && (
-                    <div className="absolute inset-0 z-10 bg-red-700/70 transition-opacity duration-400" />
+                    <div className="absolute w-[230px] inset-0 z-10 bg-red-700/70 transition-opacity duration-400" />
                   )}
 
                   {/* Overlay Text */}
                   {isCardHovered && (
-                    <div className="absolute inset-0 z-20 flex items-center justify-center transition-opacity duration-200">
+                    <div className="absolute w-[230px] inset-0 z-20 flex items-center justify-center transition-opacity duration-200">
                       <div className="text-white text-center flex gap-2 items-center justify-center">
                         <Link
                           href="/"
@@ -201,6 +201,11 @@ const Websites = () => {
           </div>
         )}
       </div>
+      <button className="block mx-auto mt-4">
+        <Link href="#" className="text-red-800 capitalize hover:scale-105 transition-all duration-300">
+          view more
+        </Link>
+      </button>
     </div>
   );
 };

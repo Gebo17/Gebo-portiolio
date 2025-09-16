@@ -1,3 +1,4 @@
+'use client'
 import { FadeUp } from "@/components";
 import Image from "next/image";
 import React, { useState } from "react";

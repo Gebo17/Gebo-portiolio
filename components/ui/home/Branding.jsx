@@ -1,6 +1,7 @@
 'use client'
 import { FadeUp } from "@/components";
 import { createClient } from "contentful";
+import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 
 const Branding = () => {
@@ -81,15 +82,15 @@ const Branding = () => {
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative mb-8">
       <FadeUp>
-        <h1 className="mt-4 px-4">
+        <h1 className="mt-4 px-4 max-w-[380px] mx-auto">
           I create professional and eye-catching designs that communicate your
           message effectively
         </h1>
       </FadeUp>
 
-      <div className="mt-4">
+      <div className="mt-8">
         {posters === null ? (
           <div className="text-red-500 absolute left-1/2 top-[100px] -translate-x-1/2">
             <p className="w-10 h-10 border-4 border-red-500 border-t-transparent rounded-full animate-spin"></p>
@@ -97,7 +98,7 @@ const Branding = () => {
         ) : (
           <div
             ref={scrollRef}
-            className="overflow-x-scroll hide-scrollbar mx-auto w-[80vw] flex items-start gap-4 sm:gap-12"
+            className="mb-8 overflow-x-scroll hide-scrollbar mx-auto w-[80vw] flex items-start gap-4 sm:gap-12"
           >
             {posters[1].fields.posters.map((poster) => {
               const title = poster.fields.title || "Untitled";
@@ -112,7 +113,7 @@ const Branding = () => {
                   key={poster.sys.id}
                   onMouseEnter={() => setHoveredCardId(poster.sys.id)}
                   onMouseLeave={() => setHoveredCardId(null)}
-                  className="sm:w-[200px] w-[230px] cursor-pointer border rounded shadow-red-400 shadow-md relative"
+                  className="sm:w-[200px] w-[230px] cursor-pointer rounded shadow-red-400 shadow-md relative"
                 >
                   {/* Image */}
                   <div className="w-[230px]">
@@ -128,7 +129,7 @@ const Branding = () => {
                           src={imageUrl}
                           alt={title}
                           onLoad={() => setImageLoaded(true)}
-                          className={`w-full h-auto transition-opacity duration-500 ${
+                          className={`w-full border border-red-800 rounded h-auto transition-opacity duration-500 ${
                             imageLoaded ? "opacity-100" : "opacity-0"
                           }`}
                         />
@@ -142,12 +143,12 @@ const Branding = () => {
 
                   {/* Red Overlay */}
                   {isCardHovered && (
-                    <div className="absolute inset-0 z-10 bg-red-700/70 transition-opacity duration-400" />
+                    <div className="absolute w-[230px] inset-0 z-10 bg-red-700/70 transition-opacity duration-400" />
                   )}
 
                   {/* Overlay Text */}
                   {isCardHovered && (
-                    <div className="absolute inset-0 z-20 flex items-center justify-center transition-opacity duration-200">
+                    <div className="absolute w-[230px] inset-0 z-20 flex items-center justify-center transition-opacity duration-200">
                       <div className="text-white text-center">
                         <h2 className="text-lg font-bold">{title}</h2>
                       </div>
@@ -159,6 +160,16 @@ const Branding = () => {
           </div>
         )}
       </div>
+
+    <button className="block mx-auto mt-4" >
+      <Link
+       href='#'
+       className="text-red-800 capitalize hover:scale-105 transition-all duration-300"
+      >
+      view more
+      </Link>
+    </button>
+
     </div>
   );
 };

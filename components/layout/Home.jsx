@@ -56,7 +56,7 @@ const Home = ({ setCurrentTab, currentTab }) => {
                 return (
                   <div
                     key={index}
-                    className="cursor-pointer text-[10px] md:text-[16px] sm:text-[14px] max-sm:w-[90px] max-sm:font-semibold capitalize"
+                    className="cursor-pointer text-[10px] md:text-[15px] sm:text-[13px] max-sm:w-[90px] max-sm:font-semibold capitalize"
                   >
                     <p
                       onClick={() => {
