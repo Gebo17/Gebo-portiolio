@@ -9,7 +9,7 @@ const WhoIAm = () => {
   return (
     <div className="mt-4 flex justify-center items-center max-sm:flex-col gap-4 md:gap-8 xl:gap-12">
       <div className="shrink-0">
-        <div className="rounded-full">
+        <div className="rounded-full relative">
           {!imageLoaded && (
             <div className="text-red-500 text-center absolute inset-0 flex items-center justify-center">
               <p className="w-6 h-6 border-4 border-red-500 border-t-transparent rounded-full animate-spin"></p>

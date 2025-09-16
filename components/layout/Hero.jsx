@@ -11,8 +11,8 @@ const Hero = () => {
   });
 
   return (
-    <div className="relative border-b-8 border-blue-900/70 h-[50vh] sm:h-[60vh] md:h-[70vh]">
-      <div className="absolute border-b-8 border-blue-900 z-10 left-0 top-0 w-full md:h-full flex justify-center items-center">
+    <div className="relative h-[50vh] md:h-[70vh]">
+      <div className="absolute z-10 left-0 top-0 w-full md:h-full flex justify-center items-center">
         <video
           src="/assets/videos/dan.mp4"
           className="w-full h-full"
