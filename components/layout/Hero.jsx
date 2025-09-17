@@ -9,12 +9,12 @@ const Hero = () => {
   });
 
   return (
-    <div className="relative w-full h-[40vh] md:h-[70vh] overflow-hidden">
+    <div className="relative w-full h-[40vh] sm:h-[50vh] md:h-[70vh] overflow-hidden">
       {/* Video background without object-cover */}
       <div className="absolute inset-0 z-0 flex justify-center items-center">
         <video
           src="/assets/videos/dan.mp4"
-          className="absolute top-1/2 left-1/2 min-w-full min-h-full transform -translate-x-1/2 -translate-y-1/2"
+          className="object-cover absolute top-1/2 left-1/2 min-w-full min-h-full transform -translate-x-1/2 -translate-y-1/2"
           autoPlay
           loop
           muted
