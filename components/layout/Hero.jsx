@@ -1,6 +1,4 @@
-import Image from "next/image";
-import Link from "next/link";
-import React, { useRef } from "react";
+import React from "react";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
 
 const Hero = () => {
@@ -11,11 +9,12 @@ const Hero = () => {
   });
 
   return (
-    <div className="relative h-[50vh] md:h-[70vh]">
-      <div className="absolute z-10 left-0 top-0 w-full md:h-full flex justify-center items-center">
+    <div className="relative w-full h-[40vh] md:h-[70vh] overflow-hidden">
+      {/* Video background without object-cover */}
+      <div className="absolute inset-0 z-0 flex justify-center items-center">
         <video
           src="/assets/videos/dan.mp4"
-          className="w-full h-full"
+          className="absolute top-1/2 left-1/2 min-w-full min-h-full transform -translate-x-1/2 -translate-y-1/2"
           autoPlay
           loop
           muted
@@ -24,13 +23,16 @@ const Hero = () => {
         />
       </div>
 
-      <div className="absolute z-20 inset-0 bg-red-900/70"></div>
-      <div className="text-center font-bold w-full z-30 text-2xl sm:text-4xl text-white uppercase absolute top-1/3 md:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/70 z-10" />
+
+      {/* Text content */}
+      <div className="absolute z-20 inset-0 flex flex-col justify-center items-center text-center text-white uppercase font-bold text-2xl sm:text-4xl">
         <p>Hello!</p>
-        <p>Welcome To The World Of </p>
-        <div className="flex gap-0 justify-center items-center">
-          <p className="text-red-400 font-semibold"> {text} </p>
-          <Cursor cursorColor="red-400" cursorStyle="|" />
+        <p>Welcome To The World Of</p>
+        <div className="flex gap-1 justify-center items-center">
+          <p className="text-red-400 font-semibold">{text}</p>
+          <Cursor cursorColor="rgb(248,113,113)" cursorStyle="|" />
         </div>
       </div>
     </div>

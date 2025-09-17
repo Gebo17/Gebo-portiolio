@@ -18,7 +18,7 @@ export default function Home() {
           href="https://wa.me/255688043125?text=Hello%20GEBO"
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-8 right-6 z-50 animate-bounce"
+      className="fixed bottom-26 right-6 z-50 animate-bounce"
     >
       <div className="bg-green-500/70 hover:bg-green-600/50 text-white rounded-full p-4 shadow-lg">
         <svg
