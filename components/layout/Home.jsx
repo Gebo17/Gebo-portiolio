@@ -94,10 +94,10 @@ const Home = ({ setCurrentTab, currentTab }) => {
                 />
               </div>
               <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20  text-center w-full text-white">
-                <p className="font-semibold text-4xl">Let's Build</p>
-                <p className="font-semibold text-4xl">Amazing Things</p>
-                <p className="font-semibold text-4xl">That Stand Out</p>
-                <div className="mt-4 flex gap-2 justify-center items-center">
+                <p className="font-semibold text-3xl">Let's Build</p>
+                <p className="font-semibold text-3xl">Amazing Things</p>
+                <p className="font-semibold text-3xl">That Stand Out</p>
+                <div className="mt-2 flex gap-2 justify-center items-center">
                   <div className="w-20 h-[2px] bg-white " />
                   Together
                   <div className="w-20 h-[2px] bg-white " />
@@ -110,7 +110,7 @@ const Home = ({ setCurrentTab, currentTab }) => {
                   }
                   transition={{ duration: 0.6, ease: "easeOut" }}
                   ref={ref}
-                  className="mt-12 flex items-start justify-around font-bold"
+                  className="mt-8 flex items-start justify-around font-bold"
                 >
                   <div>
                     <CountUp start={0} end={60} /> <span>+</span>

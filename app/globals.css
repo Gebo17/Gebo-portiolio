@@ -3,10 +3,16 @@
 @theme {
   --color-primary-red: #cc0000;
   --color-deep-red: #8f0707;
+  --color-footer-red: #B22424;
   --color-sec-red: #ff9999;
   --color-primary-green: #149805;
 }
 
+body {
+    font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
 
 .scorllbar-x {
   overflow-x: scroll;

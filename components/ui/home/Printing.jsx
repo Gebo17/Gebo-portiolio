@@ -149,7 +149,15 @@ const Printing = () => {
 
                   {/* Overlay Text */}
                   {isCardHovered && (
-                    <div className="absolute w-[230px] inset-0 z-20 flex items-center justify-center transition-opacity duration-200">
+                    <div className="absolute w-[230px] inset-0 z-20 flex flex-col items-center justify-center transition-opacity duration-200">
+                      <div className="hover:scale-125 transition-all duration-300">
+                                                                      <Image
+                                                                        src="/assets/icons/eye.png"
+                                                                        alt="eye icon"
+                                                                        width={35}
+                                                                        height={35}
+                                                                      />
+                                              </div>
                       <div className="text-white text-center">
                         <h2 className="text-lg font-bold">{title}</h2>
                       </div>
