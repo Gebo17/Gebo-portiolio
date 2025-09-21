@@ -83,7 +83,7 @@ const Home = ({ setCurrentTab, currentTab }) => {
           </div>
 
           {homeTab === "default" && (
-            <div className="relative w-full min-h-[43vh] ">
+            <div className="relative w-full min-h-[42vh] ">
               <div className="absolute z-10 left-0 top-0 w-full h-full">
                 <Image
                   src="/assets/photos/aboutbg.png"
@@ -110,7 +110,7 @@ const Home = ({ setCurrentTab, currentTab }) => {
                   }
                   transition={{ duration: 0.6, ease: "easeOut" }}
                   ref={ref}
-                  className="mt-8 flex items-start justify-around font-bold"
+                  className="mt-6 flex items-start justify-around font-bold"
                 >
                   <div>
                     <CountUp start={0} end={60} /> <span>+</span>
