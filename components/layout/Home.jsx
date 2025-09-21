@@ -48,7 +48,7 @@ const Home = ({ setCurrentTab, currentTab }) => {
         </div>
       ) : (
         <div className="min-h-[50vh] w-full">
-          <div className="mt-2">
+          <div className="">
             <div className="mx-auto sm:pr-4 py-2 bg-amber-50 flex flex-wrap justify-center items-center gap-1 sm:gap-2 md:gap-4 capitalize w-full">
               {HOME_LINKS.map((navlink, index) => {
                 const isActive = homeTab === navlink.text;
