@@ -23,7 +23,7 @@ const Services = () => {
           />
         </div>
       </div>
-      <div className="flex flex-wrap justify-center gap-2 md:gap-4 mt-4">
+      <div className="flex flex-wrap justify-center gap-1 md:gap-4 mt-4">
       <FadeUp>
       <div className="mt-2 h-[160px] hover:scale-105 transition-all duration-300 mx-auto flex flex-col justify-center shadow-lg shadow-red-200 rounded-md px-4 min-w-[340px] ">
         <p className='font-semibold'>Brand Identity Design</p>

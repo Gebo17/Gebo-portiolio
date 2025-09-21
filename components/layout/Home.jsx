@@ -83,7 +83,7 @@ const Home = ({ setCurrentTab, currentTab }) => {
           </div>
 
           {homeTab === "default" && (
-            <div className="relative w-full min-h-[50vh] ">
+            <div className="relative w-full min-h-[43vh] ">
               <div className="absolute z-10 left-0 top-0 w-full h-full">
                 <Image
                   src="/assets/photos/aboutbg.png"
@@ -94,9 +94,9 @@ const Home = ({ setCurrentTab, currentTab }) => {
                 />
               </div>
               <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20  text-center w-full text-white">
-                <p className="font-semibold text-3xl">Let's Build</p>
-                <p className="font-semibold text-3xl">Amazing Things</p>
-                <p className="font-semibold text-3xl">That Stand Out</p>
+                <p className="font-semibold text-2xl">Let's Build</p>
+                <p className="font-semibold text-2xl">Amazing Things</p>
+                <p className="font-semibold text-2xl">That Stand Out</p>
                 <div className="mt-2 flex gap-2 justify-center items-center">
                   <div className="w-20 h-[2px] bg-white " />
                   Together
