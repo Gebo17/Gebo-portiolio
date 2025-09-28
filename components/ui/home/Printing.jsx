@@ -170,11 +170,9 @@ const Printing = () => {
         )}
       </div>
 
-      <button className="block mx-auto mt-4">
-        <Link href="/printing" className="text-red-800 capitalize hover:scale-105 transition-all duration-300">
+       <Link href="/printing" className="block mx-auto mt-4 text-red-800 capitalize hover:scale-105 transition-all duration-300">
           view more
         </Link>
-      </button>
     </div>
   );
 };
