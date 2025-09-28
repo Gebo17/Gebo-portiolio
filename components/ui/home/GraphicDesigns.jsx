@@ -170,7 +170,7 @@ const GraphicDesigns = () => {
         )}
       </div>
 
-       <Link href="/graphicdesigns" className="block mx-auto mt-4 text-red-800 capitalize hover:scale-105 transition-all duration-300">
+       <Link href="/graphicdesigns" className="block mx-auto mt-4 text-red-800 capitalize text-center hover:scale-105 transition-all duration-300">
           view more
         </Link>
     </div>
