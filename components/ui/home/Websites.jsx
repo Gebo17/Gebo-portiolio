@@ -103,7 +103,7 @@ const Websites = () => {
             ref={scrollRef}
             className="overflow-x-scroll scroll-smooth hide-scrollbar mx-auto w-[80vw] flex items-start gap-4 sm:gap-12"
           >
-            {posters[4].fields.posters.map((poster) => {
+            {posters[4].fields.posters.slice(0,8).map((poster) => {
               const title = poster.fields.title || "Untitled";
               const imageUrl = poster?.fields?.file?.url
                 ? `https:${poster.fields.file.url}`
