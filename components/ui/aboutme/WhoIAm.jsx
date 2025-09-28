@@ -16,7 +16,7 @@ const WhoIAm = () => {
             </div>
           )}
           <img
-            src="/assets/photos/aboutgebo.svg"
+            src="/assets/photos/dan1.jpg"
             alt="about gebo"
             onLoad={() => setImageLoaded(true)}
             className={`w-[300px] h-auto transition-opacity duration-500 ${

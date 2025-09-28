@@ -171,7 +171,7 @@ const GraphicDesigns = () => {
       </div>
 
       <button className="block mx-auto mt-4">
-        <Link href="#" className="text-red-800 capitalize hover:scale-105 transition-all duration-300">
+        <Link href="/graphicdesigns" className="text-red-800 capitalize hover:scale-105 transition-all duration-300">
           view more
         </Link>
       </button>

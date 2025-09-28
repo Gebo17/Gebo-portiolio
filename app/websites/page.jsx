@@ -4,67 +4,15 @@ import { createClient } from "contentful";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
+import Navbar from "../../components/Navbar";
 
-const Websites = () => {
+
+const Page = () => {
   const [posters, setPosters] = useState(null);
   const [hoveredCardId, setHoveredCardId] = useState(null);
-  const scrollRef = useRef(null);
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-
-    let direction = 1; // 1 → right, -1 → left
-    const speed = 1; // px per frame; tweak to taste
-    let hovered = false;
-    let rafId = 0;
-
-    const tick = () => {
-      if (!hovered) {
-        // bounce at edges
-        if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 1) {
-          direction = -1;
-        } else if (el.scrollLeft <= 0) {
-          direction = 1;
-        }
-        el.scrollLeft += speed * direction;
-      }
-      rafId = requestAnimationFrame(tick);
-    };
-
-    // pause/resume on hover
-    const onEnter = () => {
-      hovered = true;
-    };
-    const onLeave = () => {
-      hovered = false;
-    };
-
-    // allow natural manual scroll:
-    //  - vertical wheel → horizontal scroll in the strip
-    //  - prevent page from scrolling while interacting with the strip
-    const onWheel = (e) => {
-      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-        e.preventDefault();
-        el.scrollLeft += e.deltaY;
-      }
-    };
-
-    el.addEventListener("pointerenter", onEnter);
-    el.addEventListener("pointerleave", onLeave);
-    el.addEventListener("wheel", onWheel, { passive: false });
-
-    rafId = requestAnimationFrame(tick);
-
-    return () => {
-      cancelAnimationFrame(rafId);
-      el.removeEventListener("pointerenter", onEnter);
-      el.removeEventListener("pointerleave", onLeave);
-      el.removeEventListener("wheel", onWheel);
-    };
-  }, [scrollRef.current]);
-
+  
   // ✅ Fetch posters from Contentful
   useEffect(() => {
     const getItems = async () => {
@@ -85,12 +33,11 @@ const Websites = () => {
   }, []);
 
   return (
-    <div className="relative mb-8">
+    <div>
+          <Navbar/>
+    <div className="relative min-h-[80vh] mb-8">
       <FadeUp>
-        <h1 className="mt-4 px-4 mx-auto max-w-[400px]">
-          I create professional and eye-catching designs that communicate your
-          message effectively
-        </h1>
+                <h1 className="mt-4 uppercase text-center font-bold">Website designs</h1>
       </FadeUp>
 
       <div className="mt-4 md:mt-8">
@@ -100,8 +47,7 @@ const Websites = () => {
           </div>
         ) : (
           <div
-            ref={scrollRef}
-            className="overflow-x-scroll scroll-smooth hide-scrollbar mx-auto w-[80vw] flex items-start gap-4 sm:gap-12"
+            className="mx-auto w-full px-4 flex flex-wrap items-center justify-center sm:items-start sm:justify-start gap-4 sm:gap-12"
           >
             {posters[4].fields.posters.map((poster) => {
               const title = poster.fields.title || "Untitled";
@@ -116,7 +62,7 @@ const Websites = () => {
                   key={poster.sys.id}
                   onMouseEnter={() => setHoveredCardId(poster.sys.id)}
                   onMouseLeave={() => setHoveredCardId(null)}
-                  className="sm:w-[200px] w-[230px] rounded shadow-red-400 shadow-md relative"
+                  className="sm:w-[200px] w-[230px] rounded shadow-black/40 shadow-md relative"
                 >
                   {/* Image */}
                   <div className="w-[230px] relative">
@@ -132,7 +78,7 @@ const Websites = () => {
                           src={imageUrl}
                           alt={title}
                           onLoad={() => setImageLoaded(true)}
-                          className={`w-full border border-red-800 rounded h-auto transition-opacity duration-500 ${
+                          className={`w-full border border-black/40 rounded h-auto transition-opacity duration-500 ${
                             imageLoaded ? "opacity-100" : "opacity-0"
                           }`}
                         />
@@ -201,13 +147,10 @@ const Websites = () => {
           </div>
         )}
       </div>
-      <button className="block mx-auto mt-4">
-        <Link href="/websites" className="text-red-800 capitalize hover:scale-105 transition-all duration-300">
-          view more
-        </Link>
-      </button>
+     
+    </div>
     </div>
   );
 };
 
-export default Websites;
+export default Page;

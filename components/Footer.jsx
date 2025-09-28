@@ -40,8 +40,8 @@ const Footer = () => {
              />
              </Link>
         </div>
-        <div className="mt-4 flex max-sm:flex-col justify-center items-center gap-1 md:gap-4 text-sm">
-          <div className="flex gap-2">
+        <div className="mt-4 flex max-sm:text-[9px] max-sm:flex-row justify-center items-center gap-1 md:gap-4 text-sm">
+          <div className="flex gap-1">
             <Image
                src='/assets/icons/location.svg'
                alt='location icon'
@@ -51,7 +51,7 @@ const Footer = () => {
              <p> Tanzania, Dar Es Salaam</p>
           </div>
 
-          <div className="flex gap-2 items-center justify-start">
+          <div className="flex gap-1 items-center justify-start">
             <div className="shrink-0">
             <Image
                src='/assets/icons/email.png'

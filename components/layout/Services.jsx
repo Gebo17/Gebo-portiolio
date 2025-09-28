@@ -14,7 +14,7 @@ const Services = () => {
             </div>
           )}
           <img
-            src="/assets/photos/services_photo.svg"
+            src="/assets/photos/dan2.jpg"
             alt="about gebo"
             onLoad={() => setImageLoaded(true)}
             className={`w-[300px] h-auto transition-opacity duration-500 ${

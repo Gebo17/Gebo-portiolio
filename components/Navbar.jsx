@@ -3,6 +3,7 @@ import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import { NAVLINKS } from "../constants";
 import Loading from "./ui/Loading";
+import Link from "next/link";
 
 function MenuIcon() {
   return (
@@ -70,7 +71,11 @@ const Navbar = ({ currentTab, setCurrentTab }) => {
                     : "border-transparent"
                 }`}
               >
+                  <Link
+                   href='/'
+                  >
                 {navlink.text}
+              </Link>
               </p>
             </div>
           ))}
