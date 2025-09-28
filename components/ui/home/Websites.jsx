@@ -116,7 +116,7 @@ const Websites = () => {
                   key={poster.sys.id}
                   onMouseEnter={() => setHoveredCardId(poster.sys.id)}
                   onMouseLeave={() => setHoveredCardId(null)}
-                  className="sm:w-[200px] w-[230px] rounded shadow-red-400 shadow-md relative"
+                  className="sm:w-[200px] w-[230px] rounded shadow-red-400 shadow-lg relative"
                 >
                   {/* Image */}
                   <div className="w-[230px] relative">

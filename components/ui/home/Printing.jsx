@@ -114,7 +114,7 @@ const Printing = () => {
                   key={poster.sys.id}
                   onMouseEnter={() => setHoveredCardId(poster.sys.id)}
                   onMouseLeave={() => setHoveredCardId(null)}
-                  className="sm:w-[200px] w-[230px] cursor-pointer rounded shadow-md shadow-red-400 relative"
+                  className="sm:w-[200px] w-[230px] cursor-pointer rounded shadow-lg shadow-black/40 relative"
                 >
                   {/* Image */}
                   <div className="w-[230px]">
@@ -130,7 +130,7 @@ const Printing = () => {
                           src={imageUrl}
                           alt={title}
                           onLoad={() => setImageLoaded(true)}
-                          className={`w-full border border-red-800 rounded h-auto transition-opacity duration-500 ${
+                          className={`w-full border border-black/40 rounded h-auto transition-opacity duration-500 ${
                             imageLoaded ? "opacity-100" : "opacity-0"
                           }`}
                         />

@@ -114,7 +114,7 @@ const Branding = () => {
                   key={poster.sys.id}
                   onMouseEnter={() => setHoveredCardId(poster.sys.id)}
                   onMouseLeave={() => setHoveredCardId(null)}
-                  className="sm:w-[200px] w-[230px] cursor-pointer rounded shadow-red-400 shadow-md relative"
+                  className="sm:w-[200px] w-[230px] cursor-pointer rounded shadow-black/40 shadow-lg relative"
                 >
                   {/* Image */}
                   <div className="w-[230px]">
@@ -130,7 +130,7 @@ const Branding = () => {
                           src={imageUrl}
                           alt={title}
                           onLoad={() => setImageLoaded(true)}
-                          className={`w-full border border-red-800 rounded h-auto transition-opacity duration-500 ${
+                          className={`w-full border border-black/40 rounded h-auto transition-opacity duration-500 ${
                             imageLoaded ? "opacity-100" : "opacity-0"
                           }`}
                         />
