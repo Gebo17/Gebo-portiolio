@@ -110,7 +110,7 @@ const Home = ({ setCurrentTab, currentTab }) => {
                   }
                   transition={{ duration: 0.6, ease: "easeOut" }}
                   ref={ref}
-                  className="mt-6 flex items-start justify-around font-bold"
+                  className="mt-4 flex items-start justify-around font-bold"
                 >
                   <div>
                     <CountUp start={0} end={60} /> <span>+</span>

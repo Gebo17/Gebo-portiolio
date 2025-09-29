@@ -32,7 +32,11 @@ const Hero = () => {
       </div>
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/70 z-10" />
+      {
+        isVideoLoaded && (
+          <div className="absolute inset-0 bg-black/70 z-10" />
+        )
+      }
 
       {/* Text content */}
       {
