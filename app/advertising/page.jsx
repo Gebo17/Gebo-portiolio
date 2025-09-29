@@ -43,7 +43,7 @@ const Advertising = () => {
           </div>
         ) : (
           <div
-            className="mx-auto w-full px-1 flex flex-wrap items-start justify-start sm:items-center sm:justify-center gap-4 sm:gap-12"
+            className="mx-auto w-full px-1 flex flex-wrap items-start justify-center sm:items-center sm:justify-center gap-4 sm:gap-12"
           >
             {posters[0].fields.posters.map((poster) => {
               const title = poster.fields.title || "Untitled";
