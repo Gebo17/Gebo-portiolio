@@ -33,7 +33,7 @@ const Footer = () => {
               href='#'
              >
              <Image
-               src='/assets/icons/linkedin.svg'
+               src='/assets/icons/Linkedin.svg'
                alt='linkedin'
                width={20}
                height={20}

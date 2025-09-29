@@ -44,7 +44,7 @@ const Page = () => {
           </div>
         ) : (
           <div
-            className="mx-auto w-full px-4 flex flex-wrap items-center justify-center sm:items-start sm:justify-start gap-4 sm:gap-12"
+            className="mx-auto w-full px-4 flex flex-wrap items-start justify-start sm:items-center sm:justify-center gap-4 sm:gap-12"
           >
             {posters[3].fields.posters.map((poster) => {
               const title = poster.fields.title || "Untitled";
@@ -59,10 +59,10 @@ const Page = () => {
                   key={poster.sys.id}
                   onMouseEnter={() => setHoveredCardId(poster.sys.id)}
                   onMouseLeave={() => setHoveredCardId(null)}
-                  className="sm:w-[200px] w-[230px] cursor-pointer rounded shadow-md shadow-black/40 relative"
+                  className="sm:w-[200px] w-[160px] cursor-pointer rounded shadow-md shadow-black/40 relative"
                 >
                   {/* Image */}
-                  <div className="w-[230px]">
+                  <div className="w-[160px]">
                     {imageUrl ? (
                       <div className="relative">
                         {!imageLoaded ? (
@@ -89,12 +89,12 @@ const Page = () => {
 
                   {/* Red Overlay */}
                   {isCardHovered && (
-                    <div className="absolute w-[230px] inset-0 z-10 bg-red-700/70 transition-opacity duration-400" />
+                    <div className="absolute sm:w-[200px] w-[160px] inset-0 z-10 bg-red-700/70 transition-opacity duration-400" />
                   )}
 
                   {/* Overlay Text */}
                   {isCardHovered && (
-                    <div className="absolute w-[230px] inset-0 z-20 flex flex-col items-center justify-center transition-opacity duration-200">
+                    <div className="absolute sm:w-[200px] w-[160px] inset-0 z-20 flex flex-col items-center justify-center transition-opacity duration-200">
                       <div className="hover:scale-125 transition-all duration-300">
                                                                       <Image
                                                                         src="/assets/icons/eye.png"
