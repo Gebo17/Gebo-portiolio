@@ -8,7 +8,7 @@ const Footer = () => {
         <p className='pt-4'>Just be creative</p>
         <div className='max-w-[300px] mx-auto mt-4 flex items-center justify-around py-2 w-full bg-[#FFF1F1] rounded-2xl'>
              <Link
-              href='#'
+              href='https://www.instagram.com/gebo_creative?igsh=YXE2bmp4dmFzdzR1'
              >
              <Image
                src='/assets/icons/instagram.svg'
@@ -19,7 +19,7 @@ const Footer = () => {
              </Link>
 
               <Link
-              href='#'
+              href='https://www.facebook.com/share/1DEH6fDNx1/'
              >
              <Image
                src='/assets/icons/facebook.svg'
@@ -30,7 +30,7 @@ const Footer = () => {
              </Link>
     
              <Link
-              href='#'
+              href='https://www.linkedin.com/in/gebo-creative-671088362?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'
              >
              <Image
                src='/assets/icons/Linkedin.svg'

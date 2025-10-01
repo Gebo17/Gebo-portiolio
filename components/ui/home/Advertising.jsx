@@ -228,7 +228,7 @@ const Advertising = () => {
 
           <div
             ref={scrollRef2}
-            className="overflow-x-scroll hide-scrollbar mx-auto w-[80vw] flex items-start gap-4 sm:gap-12"
+            className="overflow-x-scroll hide-scrollbar mx-auto w-[90vw] flex items-start gap-4 sm:gap-12"
           >
             {posters[0].fields.posters.slice(0,8).map((poster) => {
               const title = poster.fields.title || "Untitled";
