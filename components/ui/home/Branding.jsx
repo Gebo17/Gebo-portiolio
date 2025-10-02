@@ -155,7 +155,7 @@ const Branding = () => {
           <div>
             <div
             ref={scrollRef1}
-            className="overflow-x-scroll hide-scrollbar mb-4 mx-auto w-[80vw] flex items-start gap-4 sm:gap-12"
+            className="overflow-x-scroll hide-scrollbar mb-4 mx-auto w-[90vw] flex items-start gap-4 sm:gap-12"
           >
             {posters[1].fields.posters.slice(0,8).map((poster) => {
               const title = poster.fields.title || "Untitled";

@@ -155,7 +155,7 @@ const Printing = () => {
           <div>
             <div
             ref={scrollRef1}
-            className="overflow-x-scroll hide-scrollbar mx-auto mb-4 w-[80vw] flex items-start gap-4 sm:gap-12"
+            className="overflow-x-scroll hide-scrollbar mx-auto mb-4 w-[90vw] flex items-start gap-4 sm:gap-12"
           >
             {posters[3].fields.posters.slice(0,8).map((poster) => {
               const title = poster.fields.title || "Untitled";
