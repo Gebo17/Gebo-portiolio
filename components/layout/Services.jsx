@@ -4,10 +4,10 @@ import { FadeUp } from '..'
 const Services = () => {
   const [imageLoaded, setImageLoaded] = useState(false)
   return (
-    <div className='px-4 mt-4 pb-4 bg-[#E9FFFD] '>
-      <div className="flex flex-col md:flex-row md:gap-4 items-center justify-center">
-      <p className='max-w-[500px] sm:mx-auto '>I offer a wide range of professional design and visual communication solutions tailored to help individuals, brands, and organizations stand out.</p>
-      <div className="rounded-full relative bg-red-500 mt-4">
+    <div className='px-4 mt-4 pb-4 bg-[#E9FFFD] flex flex-col'>
+      <div className="flex flex-col lg:flex-row md:gap-4 items-center justify-center pt-4">
+      <p className='max-w-[500px] shrink-0 sm:ml-auto '>I offer a wide range of professional design and visual communication solutions tailored to help individuals, brands, and organizations stand out.</p>
+      <div className="rounded-full shrink-0 relative mt-4 flex items-center justify-center mx-auto">
           {!imageLoaded && (
             <div className="text-red-500 text-center absolute inset-0 flex items-center justify-center">
               <p className="w-6 h-6 border-4 border-red-500 border-t-transparent rounded-full animate-spin"></p>

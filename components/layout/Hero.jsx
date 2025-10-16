@@ -45,7 +45,7 @@ const Hero = () => {
         <p>Hello!</p>
         <p>Welcome To The World Of</p>
         <div className="flex gap-1 justify-center items-center">
-          <p className="text-red-400 font-semibold">{text}</p>
+          <p className="text-red-400 font-bold">{text}</p>
           <Cursor cursorColor="rgb(248,113,113)" cursorStyle="|" />
         </div>
       </div>

@@ -5,7 +5,7 @@ import React from 'react'
 const Footer = () => {
   return (
     <div className='bg-footer-red pb-4 text-white text-center px-4'>
-        <p className='pt-4 capitalize'>Just be creative</p>
+        <p className='pt-4 capitalize'>Just <span className="font-bold">be</span> creative</p>
         <div className='max-w-[300px] mx-auto mt-4 flex items-center justify-around py-2 w-full bg-[#FFF1F1] rounded-2xl'>
              <Link
               href='https://www.instagram.com/gebo_creative?igsh=YXE2bmp4dmFzdzR1'

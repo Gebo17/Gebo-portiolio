@@ -6,14 +6,14 @@ const Contacts = () => {
   return (
     <div className="px-4 mt-4 pb-8">
       <FadeUp>
-        <p className="max-w-[320px] mx-auto">
+        <p className="max-w-[320px] mx-auto shadow-lg p-4 ">
           I’m always excited to hear from new people about their ideas project,
           whether you need a fresh brand identity, stunning visuals, or Event
           promotion. Feel free to reach out I would love to discuss your ideas
           and create something impactful together.
         </p>
       </FadeUp>
-      <div className="max-w-[320px] mx-auto">
+      <div className="max-w-[320px] text-center mx-auto">
       <p className="mt-8">Get in Touch Today</p>
       <p className="mt-1">Send a message</p>
       </div>

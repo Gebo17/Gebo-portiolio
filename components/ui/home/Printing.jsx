@@ -132,6 +132,7 @@ const Printing = () => {
         order: "fields.title",
       });
       setPosters(response.items);
+      console.log(response.items)
     };
 
     getitems();
