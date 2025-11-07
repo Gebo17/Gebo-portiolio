@@ -41,7 +41,9 @@ const Hero = () => {
       {/* Text content */}
       {
         isVideoLoaded && (
-          <div className="absolute z-20 inset-0 flex flex-col justify-center items-center text-center text-white uppercase font-bold text-2xl sm:text-4xl">
+          <div
+          style={{ fontFamily: "libel" }}
+          className="absolute z-20 inset-0 flex flex-col justify-center items-center text-center text-white uppercase font-bold text-2xl sm:text-4xl">
         <p>Hello!</p>
         <p>Welcome To The World Of</p>
         <div className="flex gap-1 justify-center items-center">

@@ -8,6 +8,20 @@
   --color-primary-green: #149805;
 }
 
+@font-face {
+  font-family: "libel";
+  src: url("/fonts/libel_Suit_Suit_Rg.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Heathergreen";
+  src: url("/fonts/Heathergreen.otf");
+  font-weight: lighter;
+  font-style: normal;
+}
+
 body {
     font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
