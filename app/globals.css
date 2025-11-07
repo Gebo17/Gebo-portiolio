@@ -17,7 +17,7 @@
 
 @font-face {
   font-family: "Heathergreen";
-  src: url("/fonts/Heathergreen.otf");
+  src: url("/fonts/Heathergreen.woff2") format("ttf");
   font-weight: lighter;
   font-style: normal;
 }
