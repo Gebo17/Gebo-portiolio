@@ -11,12 +11,14 @@ const Branding = () => {
   const scrollRef1 = useRef(null);
   const scrollRef2 = useRef(null);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [viewerOpen, setViewerOpen] = useState(false);
+  const [viewerImage, setViewerImage] = useState({ url: null, title: "" });
 
   useEffect(() => {
     const el = scrollRef1.current; 
     if (!el) return;
 
-    let direction = 1; // 1 → right, -1 → left
+    let direction = -1; // 1 → right, -1 → left
     const speed = 1; // px per frame; tweak to taste
     let hovered = false;
     let rafId = 0;
@@ -51,6 +53,9 @@ const Branding = () => {
         el.scrollLeft += e.deltaY;
       }
     };
+
+    // start from the far right so we move left first
+    el.scrollLeft = Math.max(el.scrollWidth - el.clientWidth, 0);
 
     el.addEventListener("pointerenter", onEnter);
     el.addEventListener("pointerleave", onLeave);
@@ -137,12 +142,28 @@ const Branding = () => {
     getitems();
   }, []);
 
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") setViewerOpen(false);
+    };
+    if (viewerOpen) window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [viewerOpen]);
+
+  const openViewer = (url, title) => {
+    if (!url) return;
+    setViewerImage({ url, title });
+    setViewerOpen(true);
+  };
+
+  const closeViewer = () => setViewerOpen(false);
+
   return (
     <div className="relative mb-8">
       <FadeUp>
         <h1 className="mt-4 px-4 max-w-[380px] mx-auto">
           I create professional and eye-catching designs that communicate your
-          message effectively
+          message effectively.
         </h1>
       </FadeUp>
 
@@ -157,7 +178,7 @@ const Branding = () => {
             ref={scrollRef1}
             className="overflow-x-scroll hide-scrollbar mb-4 mx-auto w-[90vw] flex items-start gap-4 sm:gap-12"
           >
-            {posters[1].fields.posters.slice(0,8).map((poster) => {
+            {posters[1].fields.posters.slice(0,10).map((poster) => {
               const title = poster.fields.title || "Untitled";
               const imageUrl = poster?.fields?.file?.url
                 ? `https:${poster.fields.file.url}`
@@ -206,15 +227,20 @@ const Branding = () => {
                   {/* Overlay Text */}
                   {isCardHovered && (
                     <div className="absolute w-[230px] inset-0 z-20 flex flex-col items-center justify-center transition-opacity duration-200">
-                      <div className="hover:scale-125 transition-all duration-300">
-                                                                      <Image
-                                                                        src="/assets/icons/eye.png"
-                                                                        alt="eye icon"
-                                                                        width={35}
-                                                                        height={35}
-                                                                      />
-                                              </div>
-                      <div className="text-white text-center">
+                      <button
+                        type="button"
+                        aria-label={`View ${title}`}
+                        onClick={() => openViewer(imageUrl, title)}
+                        className="hover:scale-125 transition-all duration-300"
+                      >
+                        <Image
+                          src="/assets/icons/eye.png"
+                          alt="eye icon"
+                          width={35}
+                          height={35}
+                        />
+                      </button>
+                      <div className="text-white text-center mt-2">
                         <h2 className="text-lg font-bold">{title}</h2>
                       </div>
                     </div>
@@ -224,11 +250,13 @@ const Branding = () => {
             })}
           </div>
 
-          <div
+          {
+            posters[1].fields.posters.length > 10 && (
+              <div
             ref={scrollRef2}
             className="mb-8 overflow-x-scroll hide-scrollbar mx-auto w-[90vw] flex items-start gap-4 sm:gap-12"
           >
-            {posters[1].fields.posters.slice(0,8).map((poster) => {
+            {posters[1].fields.posters.slice(10,20).map((poster) => {
               const title = poster.fields.title || "Untitled";
               const imageUrl = poster?.fields?.file?.url
                 ? `https:${poster.fields.file.url}`
@@ -277,15 +305,20 @@ const Branding = () => {
                   {/* Overlay Text */}
                   {isCardHovered && (
                     <div className="absolute w-[230px] inset-0 z-20 flex flex-col items-center justify-center transition-opacity duration-200">
-                      <div className="hover:scale-125 transition-all duration-300">
-                                                                      <Image
-                                                                        src="/assets/icons/eye.png"
-                                                                        alt="eye icon"
-                                                                        width={35}
-                                                                        height={35}
-                                                                      />
-                                              </div>
-                      <div className="text-white text-center">
+                      <button
+                        type="button"
+                        aria-label={`View ${title}`}
+                        onClick={() => openViewer(imageUrl, title)}
+                        className="hover:scale-125 transition-all duration-300"
+                      >
+                        <Image
+                          src="/assets/icons/eye.png"
+                          alt="eye icon"
+                          width={35}
+                          height={35}
+                        />
+                      </button>
+                      <div className="text-white text-center mt-2">
                         <h2 className="text-lg font-bold">{title}</h2>
                       </div>
                     </div>
@@ -294,6 +327,10 @@ const Branding = () => {
               );
             })}
           </div>
+            )
+          }
+
+          
           </div>
         )}
       </div>
@@ -302,6 +339,39 @@ const Branding = () => {
           view more
         </Link>
 
+      {viewerOpen && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/80 flex items-center justify-center p-4"
+          onClick={closeViewer}
+        >
+          <div
+            className="relative max-w-5xl w-full max-h-[85vh]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              aria-label="Close"
+              className="absolute -top-3 -right-3 bg-white text-black rounded-full w-8 h-8 flex items-center justify-center shadow"
+              onClick={closeViewer}
+            >
+              ×
+            </button>
+            {viewerImage.url ? (
+              <img
+                src={viewerImage.url}
+                alt={viewerImage.title || "Selected image"}
+                className="w-full h-full object-contain rounded border border-white/20 bg-black"
+                style={{ maxHeight: "85vh" }}
+              />
+            ) : null}
+            {viewerImage.title ? (
+              <div className="mt-2 text-center text-white">
+                <span className="text-sm opacity-80">{viewerImage.title}</span>
+              </div>
+            ) : null}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

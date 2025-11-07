@@ -11,25 +11,35 @@ const Websites = () => {
   const scrollRef1 = useRef(null);
   const scrollRef2 = useRef(null);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [viewerOpen, setViewerOpen] = useState(false);
+  const [viewerImage, setViewerImage] = useState({ url: null, title: "" });
 
   useEffect(() => {
+    if (!posters) return;
+
     const el = scrollRef1.current;
     if (!el) return;
 
-    let direction = 1; // 1 → right, -1 → left
     const speed = 1; // px per frame; tweak to taste
+    let direction = 1; // 1 → right, -1 → left
     let hovered = false;
     let rafId = 0;
 
     const tick = () => {
       if (!hovered) {
-        // bounce at edges
-        if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 1) {
-          direction = -1;
-        } else if (el.scrollLeft <= 0) {
-          direction = 1;
+        const maxScroll = Math.max(el.scrollWidth - el.clientWidth, 0);
+        if (maxScroll > 0) {
+          if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 1) {
+            direction = -1;
+          } else if (el.scrollLeft <= 0) {
+            direction = 1;
+          }
+
+          el.scrollLeft = Math.min(
+            Math.max(el.scrollLeft + speed * direction, 0),
+            maxScroll
+          );
         }
-        el.scrollLeft += speed * direction;
       }
       rafId = requestAnimationFrame(tick);
     };
@@ -52,6 +62,8 @@ const Websites = () => {
       }
     };
 
+    el.scrollLeft = 0;
+
     el.addEventListener("pointerenter", onEnter);
     el.addEventListener("pointerleave", onLeave);
     el.addEventListener("wheel", onWheel, { passive: false });
@@ -64,26 +76,34 @@ const Websites = () => {
       el.removeEventListener("pointerleave", onLeave);
       el.removeEventListener("wheel", onWheel);
     };
-  }, [scrollRef1.current]);
+  }, [posters]);
 
   useEffect(() => {
+    if (!posters) return;
+
     const el = scrollRef2.current;
     if (!el) return;
 
-    let direction = 1; // 1 → right, -1 → left
     const speed = 1.5; // px per frame; tweak to taste
+    let direction = -1; // 1 → right, -1 → left
     let hovered = false;
     let rafId = 0;
 
     const tick = () => {
       if (!hovered) {
-        // bounce at edges
-        if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 1) {
-          direction = -1;
-        } else if (el.scrollLeft <= 0) {
-          direction = 1;
+        const maxScroll = Math.max(el.scrollWidth - el.clientWidth, 0);
+        if (maxScroll > 0) {
+          if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 1) {
+            direction = -1;
+          } else if (el.scrollLeft <= 0) {
+            direction = 1;
+          }
+
+          el.scrollLeft = Math.min(
+            Math.max(el.scrollLeft + speed * direction, 0),
+            maxScroll
+          );
         }
-        el.scrollLeft += speed * direction;
       }
       rafId = requestAnimationFrame(tick);
     };
@@ -106,6 +126,8 @@ const Websites = () => {
       }
     };
 
+    el.scrollLeft = Math.max(el.scrollWidth - el.clientWidth, 0);
+
     el.addEventListener("pointerenter", onEnter);
     el.addEventListener("pointerleave", onLeave);
     el.addEventListener("wheel", onWheel, { passive: false });
@@ -118,7 +140,7 @@ const Websites = () => {
       el.removeEventListener("pointerleave", onLeave);
       el.removeEventListener("wheel", onWheel);
     };
-  }, [scrollRef2.current]);
+  }, [posters]);
 
   // ✅ Fetch posters from Contentful
   useEffect(() => {
@@ -138,6 +160,22 @@ const Websites = () => {
 
     getItems();
   }, []);
+
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") setViewerOpen(false);
+    };
+    if (viewerOpen) window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [viewerOpen]);
+
+  const openViewer = (url, title) => {
+    if (!url) return;
+    setViewerImage({ url, title });
+    setViewerOpen(true);
+  };
+
+  const closeViewer = () => setViewerOpen(false);
 
   return (
     <div className="relative mb-8">
@@ -159,7 +197,7 @@ const Websites = () => {
             ref={scrollRef1}
             className="overflow-x-scroll scroll-smooth hide-scrollbar mb-4 mx-auto w-[90vw] flex items-start gap-4 sm:gap-12"
           >
-            {posters[4].fields.posters.slice(0,8).map((poster) => {
+            {posters[4].fields.posters.slice(0,10).map((poster) => {
               const title = poster.fields.title || "Untitled";
               const imageUrl = poster?.fields?.file?.url
                 ? `https:${poster.fields.file.url}`
@@ -209,8 +247,10 @@ const Websites = () => {
                   {isCardHovered && (
                     <div className="absolute w-[230px] inset-0 z-20 flex items-center justify-center transition-opacity duration-200">
                       <div className="text-white text-center flex gap-2 items-center justify-center">
-                        <Link
-                          href="/"
+                        <button
+                          type="button"
+                          aria-label={`View ${title}`}
+                          onClick={() => openViewer(imageUrl, title)}
                           className="hover:scale-125 transition-all duration-300"
                         >
                           <Image
@@ -219,7 +259,7 @@ const Websites = () => {
                             width={35}
                             height={35}
                           />
-                        </Link>
+                        </button>
                         <Link
                           href="/"
                           className="hover:scale-125 transition-all duration-300"
@@ -232,19 +272,7 @@ const Websites = () => {
                             fill="currentColor"
                           >
                             <path
-                              d="M12 0C5.37 0 0 5.373 0 12c0 5.303 
-                        3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 
-                        0-.285-.01-1.04-.015-2.04-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.09-.745.083-.729.083-.729 
-                        1.205.084 1.84 1.237 1.84 1.237 1.07 1.834 2.807 
-                        1.304 3.492.997.108-.775.42-1.305.763-1.605-2.665-.3-5.466-1.334-5.466-5.931 
-                        0-1.31.468-2.381 1.236-3.221-.123-.303-.536-1.523.117-3.176 
-                        0 0 1.008-.322 3.3 1.23a11.52 11.52 0 0 1 3.003-.404c1.018.005 
-                        2.042.138 3.003.404 2.29-1.552 3.296-1.23 
-                        3.296-1.23.655 1.653.242 2.873.12 3.176.77.84 
-                        1.234 1.911 1.234 3.221 0 4.609-2.803 5.628-5.475 
-                        5.921.431.372.815 1.102.815 2.222 0 1.606-.015 
-                        2.898-.015 3.293 0 .321.216.694.825.576C20.565 
-                        21.796 24 17.3 24 12c0-6.627-5.373-12-12-12z"
+                              d="M12 0C5.37 0 0 5.373 0 12c0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.09-.745.083-.729.083-.729 1.205.084 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.42-1.305.763-1.605-2.665-.3-5.466-1.334-5.466-5.931 0-1.31.468-2.381 1.236-3.221-.123-.303-.536-1.523.117-3.176 0 0 1.008-.322 3.3 1.23a11.52 11.52 0 0 1 3.003-.404c1.018.005 2.042.138 3.003.404 2.29-1.552 3.296-1.23 3.296-1.23.655 1.653.242 2.873.12 3.176.77.84 1.234 1.911 1.234 3.221 0 4.609-2.803 5.628-5.475 5.921.431.372.815 1.102.815 2.222 0 1.606-.015 2.898-.015 3.293 0 .321.216.694.825.576C20.565 21.796 24 17.3 24 12c0-6.627-5.373-12-12-12z"
                             />
                           </svg>
                         </Link>
@@ -256,62 +284,66 @@ const Websites = () => {
             })}
           </div>
 
-          <div
-            ref={scrollRef2}
-            className="overflow-x-scroll scroll-smooth hide-scrollbar mx-auto w-[90vw] flex items-start gap-4 sm:gap-12"
-          >
-            {posters[4].fields.posters.slice(0,8).map((poster) => {
-              const title = poster.fields.title || "Untitled";
-              const imageUrl = poster?.fields?.file?.url
-                ? `https:${poster.fields.file.url}`
-                : null;
-
-              const isCardHovered = hoveredCardId === poster.sys.id;
-
-              return (
-                <div
-                  key={poster.sys.id}
-                  onMouseEnter={() => setHoveredCardId(poster.sys.id)}
-                  onMouseLeave={() => setHoveredCardId(null)}
-                  className="sm:w-[200px] w-[230px] rounded shadow-red-400 shadow-lg relative"
-                >
-                  {/* Image */}
-                  <div className="w-[230px] relative">
-                    {imageUrl ? (
-                      <div className="relative">
-                        {!imageLoaded ? (
-                          <div className="text-red-500 text-center absolute inset-0 flex items-center justify-center">
-                            <p className="w-6 h-6 border-4 border-red-500 border-t-transparent rounded-full animate-spin"></p>
-                          </div>
-                        ) : null}
-
-                        <img
-                          src={imageUrl}
-                          alt={title}
-                          onLoad={() => setImageLoaded(true)}
-                          className={`w-full border border-red-800 rounded h-auto transition-opacity duration-500 ${
-                            imageLoaded ? "opacity-100" : "opacity-0"
-                          }`}
-                        />
-                      </div>
-                    ) : (
-                      <div className="w-full h-48 bg-red-400 flex items-center justify-center text-gray-500">
-                        No Image
-                      </div>
+          {
+            posters[1].fields.posters.length > 10 && (
+              <div
+              ref={scrollRef2}
+              className="overflow-x-scroll scroll-smooth hide-scrollbar mx-auto w-[90vw] flex items-start gap-4 sm:gap-12"
+            >
+              {posters[4].fields.posters.slice(10,20).map((poster) => {
+                const title = poster.fields.title || "Untitled";
+                const imageUrl = poster?.fields?.file?.url
+                  ? `https:${poster.fields.file.url}`
+                  : null;
+  
+                const isCardHovered = hoveredCardId === poster.sys.id;
+  
+                return (
+                  <div
+                    key={poster.sys.id}
+                    onMouseEnter={() => setHoveredCardId(poster.sys.id)}
+                    onMouseLeave={() => setHoveredCardId(null)}
+                    className="sm:w-[200px] w-[230px] rounded shadow-red-400 shadow-lg relative"
+                  >
+                    {/* Image */}
+                    <div className="w-[230px] relative">
+                      {imageUrl ? (
+                        <div className="relative">
+                          {!imageLoaded ? (
+                            <div className="text-red-500 text-center absolute inset-0 flex items-center justify-center">
+                              <p className="w-6 h-6 border-4 border-red-500 border-t-transparent rounded-full animate-spin"></p>
+                            </div>
+                          ) : null}
+  
+                          <img
+                            src={imageUrl}
+                            alt={title}
+                            onLoad={() => setImageLoaded(true)}
+                            className={`w-full border border-red-800 rounded h-auto transition-opacity duration-500 ${
+                              imageLoaded ? "opacity-100" : "opacity-0"
+                            }`}
+                          />
+                        </div>
+                      ) : (
+                        <div className="w-full h-48 bg-red-400 flex items-center justify-center text-gray-500">
+                          No Image
+                        </div>
+                      )}
+                    </div>
+  
+                    {/* Red Overlay */}
+                    {isCardHovered && (
+                      <div className="absolute w-[230px] inset-0 z-10 bg-red-700/70 transition-opacity duration-400" />
                     )}
-                  </div>
-
-                  {/* Red Overlay */}
-                  {isCardHovered && (
-                    <div className="absolute w-[230px] inset-0 z-10 bg-red-700/70 transition-opacity duration-400" />
-                  )}
-
-                  {/* Overlay Text */}
+  
+                    {/* Overlay Text */}
                   {isCardHovered && (
                     <div className="absolute w-[230px] inset-0 z-20 flex items-center justify-center transition-opacity duration-200">
                       <div className="text-white text-center flex gap-2 items-center justify-center">
-                        <Link
-                          href="/"
+                        <button
+                          type="button"
+                          aria-label={`View ${title}`}
+                          onClick={() => openViewer(imageUrl, title)}
                           className="hover:scale-125 transition-all duration-300"
                         >
                           <Image
@@ -320,7 +352,7 @@ const Websites = () => {
                             width={35}
                             height={35}
                           />
-                        </Link>
+                        </button>
                         <Link
                           href="/"
                           className="hover:scale-125 transition-all duration-300"
@@ -333,35 +365,60 @@ const Websites = () => {
                             fill="currentColor"
                           >
                             <path
-                              d="M12 0C5.37 0 0 5.373 0 12c0 5.303 
-                        3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 
-                        0-.285-.01-1.04-.015-2.04-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.09-.745.083-.729.083-.729 
-                        1.205.084 1.84 1.237 1.84 1.237 1.07 1.834 2.807 
-                        1.304 3.492.997.108-.775.42-1.305.763-1.605-2.665-.3-5.466-1.334-5.466-5.931 
-                        0-1.31.468-2.381 1.236-3.221-.123-.303-.536-1.523.117-3.176 
-                        0 0 1.008-.322 3.3 1.23a11.52 11.52 0 0 1 3.003-.404c1.018.005 
-                        2.042.138 3.003.404 2.29-1.552 3.296-1.23 
-                        3.296-1.23.655 1.653.242 2.873.12 3.176.77.84 
-                        1.234 1.911 1.234 3.221 0 4.609-2.803 5.628-5.475 
-                        5.921.431.372.815 1.102.815 2.222 0 1.606-.015 
-                        2.898-.015 3.293 0 .321.216.694.825.576C20.565 
-                        21.796 24 17.3 24 12c0-6.627-5.373-12-12-12z"
+                              d="M12 0C5.37 0 0 5.373 0 12c0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.09-.745.083-.729.083-.729 1.205.084 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.42-1.305.763-1.605-2.665-.3-5.466-1.334-5.466-5.931 0-1.31.468-2.381 1.236-3.221-.123-.303-.536-1.523.117-3.176 0 0 1.008-.322 3.3 1.23a11.52 11.52 0 0 1 3.003-.404c1.018.005 2.042.138 3.003.404 2.29-1.552 3.296-1.23 3.296-1.23.655 1.653.242 2.873.12 3.176.77.84 1.234 1.911 1.234 3.221 0 4.609-2.803 5.628-5.475 5.921.431.372.815 1.102.815 2.222 0 1.606-.015 2.898-.015 3.293 0 .321.216.694.825.576C20.565 21.796 24 17.3 24 12c0-6.627-5.373-12-12-12z"
                             />
                           </svg>
                         </Link>
                       </div>
                     </div>
                   )}
-                </div>
-              );
-            })}
-          </div>
+                  </div>
+                );
+              })}
+            </div>
+            )
+          }
+
+         
           </div>
         )}
       </div>
        <Link href="/websites" className="block text-center mx-auto mt-4 text-red-800 capitalize transition-all duration-300">
           view more
         </Link>
+      {viewerOpen && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/80 flex items-center justify-center p-4"
+          onClick={closeViewer}
+        >
+          <div
+            className="relative max-w-5xl w-full max-h-[85vh]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              aria-label="Close"
+              className="absolute -top-3 -right-3 bg-white text-black rounded-full w-8 h-8 flex items-center justify-center shadow"
+              onClick={closeViewer}
+            >
+              ×
+            </button>
+            {viewerImage.url ? (
+              <img
+                src={viewerImage.url}
+                alt={viewerImage.title || "Selected image"}
+                className="w-full h-full object-contain rounded border border-white/20 bg-black"
+                style={{ maxHeight: "85vh" }}
+              />
+            ) : null}
+            {viewerImage.title ? (
+              <div className="mt-2 text-center text-white">
+                <span className="text-sm opacity-80">{viewerImage.title}</span>
+              </div>
+            ) : null}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
