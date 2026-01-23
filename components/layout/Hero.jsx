@@ -28,7 +28,7 @@ const Hero = () => {
           playsInline
           preload="auto"
           onLoadedData={() => setIsVideoLoaded(true)} 
-        />
+        /> 
       </div>
 
       {/* Overlay */}
