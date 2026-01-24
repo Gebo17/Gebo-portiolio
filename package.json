@@ -12,11 +12,11 @@
   "dependencies": {
     "contentful": "^11.7.15",
     "framer-motion": "^12.23.12",
-    "next": "15.5.0",
+    "next": "^16.1.4",
     "next-sitemap": "^4.2.3",
-    "react": "19.1.0",
+    "react": "^19.2.3",
     "react-countup": "^6.5.3",
-    "react-dom": "19.1.0",
+    "react-dom": "^19.2.3",
     "react-intersection-observer": "^9.16.0",
     "react-simple-typewriter": "^5.0.1"
   },

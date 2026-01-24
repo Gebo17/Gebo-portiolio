@@ -27,7 +27,7 @@ const Hero = () => {
           muted
           playsInline
           preload="auto"
-          onLoadedData={() => setIsVideoLoaded(true)} 
+          onLoadedData={() => setIsVideoLoaded(true)}  
         /> 
       </div> 
 
