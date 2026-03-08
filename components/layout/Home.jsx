@@ -64,6 +64,7 @@ const Home = ({ setCurrentTab, currentTab }) => {
                       onClick={() => {
                         if (navlink.text === "blog") {
                           router.push("/blog");
+                          console.log('router')
                           return;
                         }
 
