@@ -1,0 +1,109 @@
+"use client";
+import React, { useEffect, useState } from "react";
+import { createClient } from "contentful";
+import moment from "moment";
+import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { SyncLoader } from "react-spinners";
+
+const page = ({ params }) => {
+  const [data, setData] = useState(null);
+  const router = useRouter();
+  const entry = React.use(params);
+
+  useEffect(() => {
+    const Getitems = async () => {
+      const client = createClient({
+                    space: "stcousdpdkot",
+                    accessToken: "Byr1nrLF2uHGrnViJS6LQllhuiYc7Aeb9Lh6WTcwptM",
+                  });
+
+      client
+        .getEntry(entry.id)
+        .then((entry) => {
+          setData(entry);
+          console.log(entry);
+        })
+        .catch(console.error);
+    };
+    Getitems();
+  }, []);
+
+  
+  const options = {
+    renderNode: {
+      [BLOCKS.HEADING_1]: (node, children) => (
+        <h1 className="text-2xl font-bold text-center my-4">{children}</h1>
+      ),
+      [BLOCKS.HEADING_2]: (node, children) => (
+        <h2 className="text-xl text-center font-semibold my-3">{children}</h2>
+      ),
+      [BLOCKS.PARAGRAPH]: (node, children) => (
+        <p className="text-base leading-relaxed my-2">{children}</p>
+      ),
+      [BLOCKS.EMBEDDED_ASSET]: (node) => {
+        const { title, file } = node.data.target.fields;
+        const imageUrl = file?.url?.startsWith("//")
+          ? "https:" + file.url
+          : file.url;
+
+        return (
+          <img
+            src={imageUrl}
+            alt={title || "Embedded asset"}
+            className="my-4 mx-auto max-w-full rounded"
+          />
+        );
+      },
+      [INLINES.HYPERLINK]: (node, children) => (
+        <a
+          href={node.data.uri}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 hover:underline"
+        >
+          {children}
+        </a>
+      ),
+    },
+  };
+  
+
+  return (
+    <div className="mb-8">
+      {data ? (
+        <div className=" px-[40px] mx-auto max-w-[800px]">
+          <section className="mt-10 mx-auto ">
+            <div className="max-w-[400px] mx-auto">
+              <img
+                src={data.fields.featuredImage.fields.file.url}
+                alt="featured image"
+                className="block w-full"
+              />
+            </div>
+
+            <div className="mt-4">
+              {documentToReactComponents(data.fields.content, options)}
+            </div>
+            <div className="flex flex-col justify-center text-sm mt-8">
+              <p>Author: {data.fields.author} </p>
+              <p className="mt-2 text-gray-600">
+                Published on: {moment(data.sys.createdAt).format("MMM Do YY")}{" "}
+              </p>
+            </div>
+          </section>
+        </div>
+      ) : (
+        <>
+          <div className="w-full h-[60vh] flex items-center justify-center">
+            <SyncLoader color="#008080" />
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+
+export default page;

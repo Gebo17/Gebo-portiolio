@@ -1,6 +1,7 @@
 import { HOME_LINKS } from "@/constants";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   Advertising,
   Branding,
@@ -18,6 +19,7 @@ import { motion } from "framer-motion";
 const Home = ({ setCurrentTab, currentTab }) => {
   const [homeTab, setHomeTab] = useState("default");
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
   const [startAnimation, setStartAnimation] = useState(false);
   const { ref, inView } = useInView({
     threshold: 0.5,
@@ -60,6 +62,11 @@ const Home = ({ setCurrentTab, currentTab }) => {
                   >
                     <p
                       onClick={() => {
+                        if (navlink.text === "blog") {
+                          router.push("/blog");
+                          return;
+                        }
+
                         if (homeTab !== navlink.text) {
                           setLoading(true);
                           setHomeTab(navlink.text);
@@ -67,11 +74,10 @@ const Home = ({ setCurrentTab, currentTab }) => {
                       }}
                       className={`
             text-center p-1 rounded-md border transition-colors duration-200
-            ${
-              isActive
-                ? "bg-primary-red text-white border-primary-red"
-                : "bg-white text-primary-red border-primary-red hover:bg-primary-red hover:text-white"
-            }
+            ${isActive
+                          ? "bg-primary-red text-white border-primary-red"
+                          : "bg-white text-primary-red border-primary-red hover:bg-primary-red hover:text-white"
+                        }
           `}
                     >
                       {navlink.text}
