@@ -141,7 +141,6 @@ const Home = ({ setCurrentTab, currentTab }) => {
           {homeTab === "branding" && <Branding />}
 
           {homeTab === "advertising" && <Advertising />}
-          {homeTab === "blog" && <Blog />}
           {homeTab === "graphic designs" && <GraphicDesigns />}
           {homeTab === "printing" && <Printing />}
           {homeTab === "websites" && <Websites />}
