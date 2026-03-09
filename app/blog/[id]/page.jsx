@@ -102,7 +102,7 @@ const page = ({ params }) => {
             ) : (
                 <>
                     <div className="w-full h-[60vh] flex items-center justify-center">
-                        <SyncLoader color="#008080" />
+                        <SyncLoader color="#A33131" />
                     </div>
                 </>
             )}
