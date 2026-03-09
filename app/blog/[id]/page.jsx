@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { SyncLoader } from "react-spinners";
-//import Navbar from "../../components/Navbar";
+import Navbar from "../../../components/Navbar";
 
 
 const page = ({ params }) => {
@@ -75,7 +75,9 @@ const page = ({ params }) => {
 
     return (
         <div className="mb-8">
-            {data ? (
+            <Navbar/>
+            <>
+              {data ? (
                 <div className=" px-[40px] mx-auto max-w-[800px]">
                     <section className="mt-10 mx-auto ">
                         <div className="max-w-[400px] mx-auto">
@@ -104,6 +106,7 @@ const page = ({ params }) => {
                     </div>
                 </>
             )}
+            </>
         </div>
     );
 };

@@ -15,6 +15,7 @@ import {
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const Home = ({ setCurrentTab, currentTab }) => {
   const [homeTab, setHomeTab] = useState("default");
@@ -60,29 +61,38 @@ const Home = ({ setCurrentTab, currentTab }) => {
                     key={index}
                     className="cursor-pointer text-[10px] md:text-[15px] sm:text-[13px] max-sm:w-[90px] max-sm:font-semibold capitalize"
                   >
-                    <p
-                      onClick={() => {
-                        if (navlink.text === "blog") {
-                          router.push("/blog");
-                          console.log('router')
-                          return;
-                        }
-
-                        if (homeTab !== navlink.text) {
-                          setLoading(true);
-                          setHomeTab(navlink.text);
-                        }
-                      }}
-                      className={`
-            text-center p-1 rounded-md border transition-colors duration-200
-            ${isActive
-                          ? "bg-primary-red text-white border-primary-red"
-                          : "bg-white text-primary-red border-primary-red hover:bg-primary-red hover:text-white"
-                        }
-          `}
-                    >
-                      {navlink.text}
-                    </p>
+                    {navlink.text === "blog" ? (
+                      <Link
+                        href="/blog"
+                        className={`
+      block text-center p-1 rounded-md border transition-colors duration-200
+      ${isActive
+                            ? "bg-primary-red text-white border-primary-red"
+                            : "bg-white text-primary-red border-primary-red hover:bg-primary-red hover:text-white"
+                          }
+    `}
+                      >
+                        {navlink.text}
+                      </Link>
+                    ) : (
+                      <p
+                        onClick={() => {
+                          if (homeTab !== navlink.text) {
+                            setLoading(true);
+                            setHomeTab(navlink.text);
+                          }
+                        }}
+                        className={`
+      text-center p-1 rounded-md border transition-colors duration-200
+      ${isActive
+                            ? "bg-primary-red text-white border-primary-red"
+                            : "bg-white text-primary-red border-primary-red hover:bg-primary-red hover:text-white"
+                          }
+    `}
+                      >
+                        {navlink.text}
+                      </p>
+                    )}
                   </div>
                 );
               })}
