@@ -2,7 +2,7 @@ import React from 'react'
 
 const Resources = () => {
   return (
-    <div>upcoming!</div>
+    <div className='text-center'>upcoming!</div>
   )
 }
 
