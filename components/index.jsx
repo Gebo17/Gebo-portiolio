@@ -17,6 +17,10 @@ import Software from "./ui/aboutme/Software";
 import WhoIAm from "./ui/aboutme/WhoIAm";
 import FadeUp from "./ui/FadeUp";
 import Loading from "./ui/Loading";
+import Articles from "./blog/Articles";
+import News from "./blog/News";
+import Resource from "./blog/Resources";
+import Gallery from "./blog/Gallery";
 
 export {
   Hero,
@@ -38,4 +42,8 @@ export {
   Blog,
   Branding,
   Advertising,
+  Articles,
+  Resource,
+  News,
+  Gallery,
 };

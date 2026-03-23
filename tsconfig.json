@@ -38,7 +38,7 @@
     "app/layout.tsx",
     "components/ui/home/GraphicDesigns.tsx",
     ".next/dev/types/**/*.ts"
-  ],
+, "components/blog/Articles.jsx", "components/blog/News.jsx", "components/blog/Gallery.jsx", "components/blog/Resources.tsx"  ],
   "exclude": [
     "node_modules"
   ]

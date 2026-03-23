@@ -76,3 +76,9 @@ export const COREVALUES = [
 ]
  
 
+export const BLOG_LINKS = [
+  'articles',
+  'news and trends',
+  'resources',
+  'gallery'
+]
