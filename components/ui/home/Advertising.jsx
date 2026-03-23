@@ -178,7 +178,7 @@ const Advertising = () => {
             ref={scrollRef1}
             className="overflow-x-scroll hide-scrollbar mx-auto mb-4 w-[90vw] flex items-start gap-4 sm:gap-12"
           >
-            {posters[0].fields.posters.slice(0,10).map((poster) => {
+            {posters[0].fields.posters.slice(0,5).map((poster) => {
               const title = poster.fields.title || "Untitled";
               const imageUrl = poster?.fields?.file?.url
                 ? `https:${poster.fields.file.url}`
@@ -207,7 +207,7 @@ const Advertising = () => {
                           <img
                             src={imageUrl}
                             alt={title}
-                            onLoad={() => setImageLoaded(true)}
+                        //    onLoad={() => setImageLoaded(true)}
                             className={`w-full border border-black/40 rounded h-auto transition-opacity duration-500 ${
                               imageLoaded ? "opacity-100" : "opacity-0"
                             }`}
@@ -258,7 +258,7 @@ const Advertising = () => {
             ref={scrollRef2}
             className="overflow-x-scroll hide-scrollbar mx-auto w-[90vw] flex items-start gap-4 sm:gap-12"
           >
-            {posters[0].fields.posters.slice(10,20).map((poster) => {
+            {posters[0].fields.posters.slice(5,10).map((poster) => {
               const title = poster.fields.title || "Untitled";
               const imageUrl = poster?.fields?.file?.url
                 ? `https:${poster.fields.file.url}`
@@ -287,7 +287,7 @@ const Advertising = () => {
                           <img
                             src={imageUrl}
                             alt={title}
-                            onLoad={() => setImageLoaded(true)}
+                          ///  onLoad={() => setImageLoaded(true)}
                             className={`w-full border border-black/40 rounded h-auto transition-opacity duration-500 ${
                               imageLoaded ? "opacity-100" : "opacity-0"
                             }`}
