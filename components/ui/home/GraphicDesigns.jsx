@@ -196,7 +196,7 @@ const GraphicDesigns = () => {
             <p className="w-10 h-10 border-4 border-red-500 border-t-transparent rounded-full animate-spin"></p>
           </div>
         ) : (
-          <div>
+          <div>  
             <div
             ref={scrollRef1}
             className="overflow-x-scroll hide-scrollbar mx-auto w-[90vw] mb-4 flex items-start gap-4 sm:gap-12"

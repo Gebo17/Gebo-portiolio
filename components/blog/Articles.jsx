@@ -83,7 +83,7 @@ const page = () => {useState
         ) : (
           <>
             <div className="w-full h-[60vh] flex items-center justify-center">
-              <SyncLoader color="#A33131" />
+              <SyncLoader size={10} color="#A33131" />
             </div>
           </>
         )}
